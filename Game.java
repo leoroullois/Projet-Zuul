@@ -40,15 +40,8 @@ public class Game {
         }
         System.out.println("Thank you for playing.  Good bye.");
     }
-
-    /**
-     * Affiche le message de bienvenue
-     */
-    public void printWelcome() {
-        System.out.println("Welcome to the World of Zuul!");
-        System.out.println("World of Zuul is a new, incredibly boring adventure game.");
-        System.out.println("Type 'help' if you need help.");
-        System.out.println("You are " + this.aCurrentRoom);
+    public void printLocationInfo() {
+        System.out.println("You are " + this.aCurrentRoom.getDescription());
         String vOutput = "";
         if (!(this.aCurrentRoom.aNorthExit == null)) {
             vOutput = vOutput + "north ";
@@ -62,7 +55,16 @@ public class Game {
         if (!(this.aCurrentRoom.aWestExit == null)) {
             vOutput = vOutput + "west";
         }
-        System.out.println("Exists: " + vOutput);
+        System.out.println("Exits: " + vOutput);
+    }
+    /**
+     * Affiche le message de bienvenue
+     */
+    public void printWelcome() {
+        System.out.println("Welcome to the World of Zuul!");
+        System.out.println("World of Zuul is a new, incredibly boring adventure game.");
+        System.out.println("Type 'help' if you need help.");
+        this.printLocationInfo();
     }
 
     /**
@@ -134,19 +136,10 @@ public class Game {
             return;
         }
 
-        Room vNextRoom = null;
         String vDirection = pCommand.getSecondWord();
-        if (vDirection.equals("north")) {
-            vNextRoom = this.aCurrentRoom.aNorthExit;
-        } else if (vDirection.equals("east")) {
-            vNextRoom = this.aCurrentRoom.aEastExit;
-        } else if (vDirection.equals("south")) {
-            vNextRoom = this.aCurrentRoom.aSouthExit;
-        } else if (vDirection.equals("west")) {
-            vNextRoom = this.aCurrentRoom.aWestExit;
-        } else {
+        Room vNextRoom=aCurrentRoom.getExit(vDirection);
+        if (this.aCurrentRoom==vNextRoom) {
             System.out.println("Unknown direction !");
-            return;
         }
 
         if (vNextRoom == null) {
@@ -154,21 +147,7 @@ public class Game {
             return;
         } else if (vNextRoom != null) {
             this.aCurrentRoom = vNextRoom;
-            System.out.println("You are " + this.aCurrentRoom.getDescription());
-            String output = "";
-            if (!(this.aCurrentRoom.aNorthExit == null)) {
-                output = output + "north ";
-            }
-            if (!(this.aCurrentRoom.aEastExit == null)) {
-                output = output + "east ";
-            }
-            if (!(this.aCurrentRoom.aSouthExit == null)) {
-                output = output + "south ";
-            }
-            if (!(this.aCurrentRoom.aWestExit == null)) {
-                output = output + "west";
-            }
-            System.out.println("Exists: " + output);
+            this.printLocationInfo();
         }
     }
 } // Game

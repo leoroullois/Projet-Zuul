@@ -17,6 +17,25 @@ public class Room {
         return this.aDescription;
     }
     /**
+     * @param direction Direction dans laquelle on veut aller. Exemple: "north".
+     * @return La salle située dans la direction passée en paramètre.
+     */
+    public Room getExit(final String direction) {
+        if (direction.equals("north")) {
+            return aNorthExit;
+        }
+        if (direction.equals("east")) {
+            return aEastExit;
+        }
+        if (direction.equals("south")) {
+            return aSouthExit;
+        } 
+        if(direction.equals("west")) {
+            return aWestExit;
+        }
+        return this;
+    }
+    /**
      * Permet de mettre les sorties
      * @param pNorthExit
      * @param pEastExit
