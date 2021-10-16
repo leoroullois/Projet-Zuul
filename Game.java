@@ -40,22 +40,10 @@ public class Game {
         }
         System.out.println("Thank you for playing.  Good bye.");
     }
+    
     public void printLocationInfo() {
         System.out.println("You are " + this.aCurrentRoom.getDescription());
-        String vOutput = "";
-        if (!(this.aCurrentRoom.aNorthExit == null)) {
-            vOutput = vOutput + "north ";
-        }
-        if (!(this.aCurrentRoom.aEastExit == null)) {
-            vOutput = vOutput + "east ";
-        }
-        if (!(this.aCurrentRoom.aSouthExit == null)) {
-            vOutput = vOutput + "south ";
-        }
-        if (!(this.aCurrentRoom.aWestExit == null)) {
-            vOutput = vOutput + "west";
-        }
-        System.out.println("Exits: " + vOutput);
+        System.out.println(this.aCurrentRoom.getExitString());
     }
     /**
      * Affiche le message de bienvenue
@@ -140,12 +128,10 @@ public class Game {
         Room vNextRoom=aCurrentRoom.getExit(vDirection);
         if (this.aCurrentRoom==vNextRoom) {
             System.out.println("Unknown direction !");
-        }
-
-        if (vNextRoom == null) {
+        }else if (vNextRoom == null) {
             System.out.println("There is no door !");
             return;
-        } else if (vNextRoom != null) {
+        } else {
             this.aCurrentRoom = vNextRoom;
             this.printLocationInfo();
         }
