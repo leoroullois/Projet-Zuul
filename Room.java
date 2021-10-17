@@ -19,21 +19,6 @@ public class Room {
         return this.aDescription;
     }
 
-    /**
-     * Permet de mettre les sorties
-     * 
-     * @param pNorthExit
-     * @param pEastExit
-     * @param pSouthExit
-     * @param pWestExit
-     */
-    public void setExits(final Room pNorthExit, final Room pEastExit, final Room pSouthExit, final Room pWestExit) {
-        this.aExits.put("north", pNorthExit);
-        this.aExits.put("east", pEastExit);
-        this.aExits.put("south", pSouthExit);
-        this.aExits.put("west", pWestExit);
-    }
-
     public void setExit(String pDirection, Room pNeighbor) {
         if (pDirection != null) {
             this.aExits.put(pDirection, pNeighbor);
@@ -44,15 +29,15 @@ public class Room {
      * @param direction Direction dans laquelle on veut aller. Exemple: "north".
      * @return La salle située dans la direction passée en paramètre.
      */
-    public Room getExit(final String direction) {
-        return this.aExits.get(direction);
+    public Room getExit(final String pDirection) {
+        return this.aExits.get(pDirection);
     }
 
     public String getExitString() {
-        String vOutput = "";
+        String vOutput = "Exits : ";
         Set<String> allKeys = this.aExits.keySet();
-        for (String vTest : allKeys) {
-            vOutput+=vTest;
+        for (String vKey : allKeys) {
+            vOutput+=vKey+" ";
         }
         return vOutput;
     }

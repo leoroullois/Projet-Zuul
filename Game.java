@@ -11,19 +11,49 @@ public class Game {
      * lire le clavier
      */
     private void createRooms() {
-        Room vOutside = new Room("outside the main entrance of the university");
-        Room vTheatre = new Room("in a lecture theatre");
-        Room vPub = new Room("in the campus pub");
-        Room vLab = new Room("in a computing lab");
-        Room vOffice = new Room("in the computing admin office");
+        Room vBitcoin = new Room("outside the main entrance of the crypto world");
+        Room vEthereum = new Room("in the room wich is the beginning of smart contracts");
+        Room vShitCoin = new Room("in the shit coin hall");
+        Room vHackLab = new Room("in a computing lab");
+        Room vTrading = new Room("in a computing office");
+        Room vICO = new Room("in the ICO paradize");
+        Room vDEFI = new Room("in the DEFI department");
+        Room vMining = new Room("in the mining room");
+        Room vNFT = new Room("in the NFT hall");
 
-        vOutside.setExits(null, vTheatre, vLab, vPub);
-        vTheatre.setExits(null, null, null, vOutside);
-        vPub.setExits(null, vOutside, null, null);
-        vLab.setExits(vOutside, vOffice, null, null);
-        vOffice.setExits(null, null, null, vLab);
+        // ! Pour l'instant tous les passages sont à double sens
+        vBitcoin.setExit("north", vEthereum);
+        vBitcoin.setExit("west", vMining);
 
-        this.aCurrentRoom = vOutside;
+        vEthereum.setExit("north", vShitCoin);
+        vEthereum.setExit("east", vTrading);
+        vEthereum.setExit("south", vBitcoin);
+        vEthereum.setExit("west", vDEFI);
+
+        vShitCoin.setExit("east", vHackLab);
+        vShitCoin.setExit("south", vEthereum);
+        vShitCoin.setExit("west", vICO);
+
+        vHackLab.setExit("south", vTrading);
+        vHackLab.setExit("west", vShitCoin);
+
+        vTrading.setExit("north", vHackLab);
+        vTrading.setExit("west", vEthereum);
+
+        vICO.setExit("east", vShitCoin);
+        vICO.setExit("south", vDEFI);
+
+        vDEFI.setExit("north", vICO);
+        vDEFI.setExit("east", vEthereum);
+        vDEFI.setExit("south", vMining);
+        vDEFI.setExit("west", vNFT);
+
+        vMining.setExit("north", vDEFI);
+        vMining.setExit("east", vBitcoin);
+
+        vNFT.setExit("east", vDEFI);
+
+        this.aCurrentRoom = vBitcoin;
 
         this.aParser = new Parser();
     }
@@ -40,11 +70,12 @@ public class Game {
         }
         System.out.println("Thank you for playing.  Good bye.");
     }
-    
+
     public void printLocationInfo() {
         System.out.println("You are " + this.aCurrentRoom.getDescription());
         System.out.println(this.aCurrentRoom.getExitString());
     }
+
     /**
      * Affiche le message de bienvenue
      */
@@ -125,10 +156,10 @@ public class Game {
         }
 
         String vDirection = pCommand.getSecondWord();
-        Room vNextRoom=aCurrentRoom.getExit(vDirection);
-        if (this.aCurrentRoom==vNextRoom) {
+        Room vNextRoom = aCurrentRoom.getExit(vDirection);
+        if (this.aCurrentRoom == vNextRoom) {
             System.out.println("Unknown direction !");
-        }else if (vNextRoom == null) {
+        } else if (vNextRoom == null) {
             System.out.println("There is no door !");
             return;
         } else {
