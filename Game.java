@@ -7,8 +7,7 @@ public class Game {
     }
 
     /**
-     * Initialise toutes les salles du jeu Positionne la salle actuelle Permet de
-     * lire le clavier
+     * Crée toutes les salles du jeu avec leurs entrées et sorties, défini la salle actuelle (Bitcoin), et enfin, lis le clavier
      */
     private void createRooms() {
         Room vBitcoin = new Room("outside the main entrance of the crypto world");
@@ -17,7 +16,8 @@ public class Game {
         Room vHackLab = new Room("in a computing lab");
         Room vTrading = new Room("in a computing office");
         Room vICO = new Room("in the ICO paradize");
-        Room vDEFI = new Room("in the DEFI department");
+        Room vDefiBSC = new Room("in the DEFI BSC department");
+        Room vDefiETH = new Room("in the DEFI ETH department");
         Room vMining = new Room("in the mining room");
         Room vNFT = new Room("in the NFT hall");
 
@@ -28,7 +28,7 @@ public class Game {
         vEthereum.setExit("north", vShitCoin);
         vEthereum.setExit("east", vTrading);
         vEthereum.setExit("south", vBitcoin);
-        vEthereum.setExit("west", vDEFI);
+        vEthereum.setExit("west", vDefiETH);
 
         vShitCoin.setExit("east", vHackLab);
         vShitCoin.setExit("south", vEthereum);
@@ -41,17 +41,20 @@ public class Game {
         vTrading.setExit("west", vEthereum);
 
         vICO.setExit("east", vShitCoin);
-        vICO.setExit("south", vDEFI);
+        vICO.setExit("south", vDefiETH);
 
-        vDEFI.setExit("north", vICO);
-        vDEFI.setExit("east", vEthereum);
-        vDEFI.setExit("south", vMining);
-        vDEFI.setExit("west", vNFT);
+        vDefiETH.setExit("north", vICO);
+        vDefiETH.setExit("up", vDefiBSC);
+        vDefiETH.setExit("east", vEthereum);
+        vDefiETH.setExit("south", vMining);
+        vDefiETH.setExit("west", vNFT);
 
-        vMining.setExit("north", vDEFI);
+        vDefiBSC.setExit("down", vDefiETH);
+
+        vMining.setExit("north", vDefiETH);
         vMining.setExit("east", vBitcoin);
 
-        vNFT.setExit("east", vDEFI);
+        vNFT.setExit("east", vDefiBSC);
 
         this.aCurrentRoom = vBitcoin;
 
@@ -71,6 +74,9 @@ public class Game {
         System.out.println("Thank you for playing.  Good bye.");
     }
 
+    /**
+     * Affiche un message pour nous informer de l'endroit où l'on se trouve.
+     */
     public void printLocationInfo() {
         System.out.println("You are " + this.aCurrentRoom.getDescription());
         System.out.println(this.aCurrentRoom.getExitString());
@@ -80,8 +86,8 @@ public class Game {
      * Affiche le message de bienvenue
      */
     public void printWelcome() {
-        System.out.println("Welcome to the World of Zuul!");
-        System.out.println("World of Zuul is a new, incredibly boring adventure game.");
+        System.out.println("Welcome to the Trade Infinity Game!");
+        System.out.println("World of Blockchains is a new, incredibly boring trading and investing game.");
         System.out.println("Type 'help' if you need help.");
         this.printLocationInfo();
     }
@@ -91,9 +97,8 @@ public class Game {
      */
     private void printHelp() {
         System.out.println("You are lost. You are alone.");
-        System.out.println("You wander around at the university.");
         System.out.println("Your command words are:");
-        System.out.println("    go quit help");
+        System.out.println("go quit help");
     }
 
     /**
@@ -136,7 +141,7 @@ public class Game {
     }
 
     /**
-     * Permet de savoir la salle actuelle
+     * Retourne l'endroit où l'on se trouve actuellement
      * 
      * @return retourne la description de la salle actuelle
      */
