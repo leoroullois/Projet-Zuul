@@ -78,8 +78,7 @@ public class Game {
      * Affiche un message pour nous informer de l'endroit où l'on se trouve.
      */
     public void printLocationInfo() {
-        System.out.println("You are " + this.aCurrentRoom.getDescription());
-        System.out.println(this.aCurrentRoom.getExitString());
+        System.out.println(this.aCurrentRoom.getLongDescription());
     }
 
     /**

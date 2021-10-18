@@ -18,7 +18,9 @@ public class Room {
     public String getDescription() {
         return this.aDescription;
     }
-
+    public String getLongDescription() {
+        return "You are "+this.aDescription+".\n"+this.getExitString();
+    }
     /**
      * Crée une sortie
      * @param pDirection direction de la sortie, par exemple "up", ou "west".
