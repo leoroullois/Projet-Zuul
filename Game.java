@@ -7,7 +7,8 @@ public class Game {
     }
 
     /**
-     * Crée toutes les salles du jeu avec leurs entrées et sorties, défini la salle actuelle (Bitcoin), et enfin, lis le clavier
+     * Crée toutes les salles du jeu avec leurs entrées et sorties, défini la salle
+     * actuelle (Bitcoin), et enfin, lis le clavier
      */
     private void createRooms() {
         Room vBitcoin = new Room("outside the main entrance of the crypto world");
@@ -115,6 +116,14 @@ public class Game {
         }
     }
 
+    private void look(final Command pCommand) {
+        if (pCommand.hasSecondWord()) {
+            System.out.println("I don't know how to look at something in particular yet.");
+        } else {
+            System.out.println(this.aCurrentRoom.getLongDescription());
+        }
+    }
+
     /**
      * Check si la commande est valide, si oui return true sinon return false
      * 
@@ -130,7 +139,10 @@ public class Game {
                 this.goRoom(pCommand);
             } else if (pCommand.getCommandWord().equals("help")) {
                 this.printHelp();
+            } else if (pCommand.getCommandWord().equals("look")) {
+                this.look(pCommand);
             }
+
             if (pCommand.getCommandWord().equals("quit")) {
                 return quit(pCommand);
             } else {
