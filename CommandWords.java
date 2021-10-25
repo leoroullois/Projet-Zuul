@@ -1,11 +1,10 @@
 public class CommandWords {
     // Tableau constant qui contient toutes les commandes valides.
-    private static final String[] VALID_COMMANDS = {
-        "go","quit","help","look"
-    };
+    private static final String[] VALID_COMMANDS = { "go", "quit", "help", "look", "buy" };
 
     /**
      * Vérifie si un String correspond bien à une commande
+     * 
      * @return true si le String correspond à une commande valide.
      */
     public boolean isCommand(final String pString) {
@@ -15,4 +14,13 @@ public class CommandWords {
         }
         return false;
     } // isCommand()
+    /**
+     * Affiche toute les commandes du jeu
+     */
+    public void showAll() {
+        for (String pCommand : VALID_COMMANDS) {
+            System.out.print(pCommand+" ");
+        }
+        System.out.println();
+    }
 } // CommandWords

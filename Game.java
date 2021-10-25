@@ -98,6 +98,7 @@ public class Game {
     private void printHelp() {
         System.out.println("You are lost. You are alone.");
         System.out.println("Your command words are:");
+        aParser.showCommands();
         System.out.println("go quit help");
     }
 
@@ -116,11 +117,27 @@ public class Game {
         }
     }
 
+    /**
+     * Défini l'action de la commande look
+     * 
+     * @param pCommand commande look
+     */
     private void look(final Command pCommand) {
         if (pCommand.hasSecondWord()) {
             System.out.println("I don't know how to look at something in particular yet.");
         } else {
             System.out.println(this.aCurrentRoom.getLongDescription());
+        }
+    }
+    /**
+     * Défini l'action de la commande buy
+     * @param pCommand commande buy crypto
+     */
+    private void buy(final Command pCommand) {
+        if (pCommand.hasSecondWord()) {
+            System.out.println("You have bought " + pCommand.getSecondWord());
+        } else {
+            System.out.println("Please tell me wich crypto currency you want to buy.");
         }
     }
 
@@ -141,6 +158,8 @@ public class Game {
                 this.printHelp();
             } else if (pCommand.getCommandWord().equals("look")) {
                 this.look(pCommand);
+            } else if (pCommand.getCommandWord().equals("buy")) {
+                this.buy(pCommand);
             }
 
             if (pCommand.getCommandWord().equals("quit")) {
@@ -173,9 +192,7 @@ public class Game {
 
         String vDirection = pCommand.getSecondWord();
         Room vNextRoom = aCurrentRoom.getExit(vDirection);
-        if (this.aCurrentRoom == vNextRoom) {
-            System.out.println("Unknown direction !");
-        } else if (vNextRoom == null) {
+        if (vNextRoom == null) {
             System.out.println("There is no door !");
             return;
         } else {
