@@ -18,7 +18,10 @@ public class Room {
     public String getDescription() {
         return this.aDescription;
     }
-
+    /**
+     * Donne une longue description de la salle
+     * @return longue description
+     */
     public String getLongDescription() {
         return "You are " + this.aDescription + ".\n" + this.getExitString();
     }

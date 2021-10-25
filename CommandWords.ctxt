@@ -1,9 +1,0 @@
-#BlueJ class context
-comment0.target=CommandWords
-comment1.params=pString
-comment1.target=boolean\ isCommand(java.lang.String)
-comment1.text=\n\ V\u00E9rifie\ si\ un\ String\ correspond\ bien\ \u00E0\ une\ commande\n\ \n\ @return\ true\ si\ le\ String\ correspond\ \u00E0\ une\ commande\ valide.\n
-comment2.params=
-comment2.target=void\ showAll()
-comment2.text=\n\ Affiche\ toute\ les\ commandes\ du\ jeu\n
-numComments=3

@@ -61,6 +61,9 @@ public class Parser {
         }
     } // getCommand()
 
+    /**
+     * Affiche toutes les commandes possibles
+     */
     public void showCommands() {
         aValidCommands.showAll();
     }

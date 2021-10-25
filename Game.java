@@ -99,7 +99,6 @@ public class Game {
         System.out.println("You are lost. You are alone.");
         System.out.println("Your command words are:");
         aParser.showCommands();
-        System.out.println("go quit help");
     }
 
     /**
