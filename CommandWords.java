@@ -14,13 +14,12 @@ public class CommandWords {
         }
         return false;
     } // isCommand()
-    /**
-     * Affiche toute les commandes du jeu
-     */
-    public void showAll() {
+
+    public String getCommandList() {
+        String vOutput = "";
         for (String pCommand : VALID_COMMANDS) {
-            System.out.print(pCommand+" ");
+            vOutput+=pCommand+" ";
         }
-        System.out.println();
+        return vOutput;
     }
 } // CommandWords

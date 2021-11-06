@@ -65,6 +65,6 @@ public class Parser {
      * Affiche toutes les commandes possibles
      */
     public void showCommands() {
-        aValidCommands.showAll();
+        System.out.println(aValidCommands.getCommandList());
     }
 } // Parser
