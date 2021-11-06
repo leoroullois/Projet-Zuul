@@ -1,0 +1,18 @@
+#BlueJ class context
+comment0.target=Command
+comment1.params=pCommandWord\ pSecondWord
+comment1.target=Command(java.lang.String,\ java.lang.String)
+comment1.text=\n\ Constructeur\n\ @param\ pCommandWord\ premier\ mot\ de\ la\ commande\n\ @param\ pSecondWord\ second\ mot\ de\ la\ commande\n
+comment2.params=
+comment2.target=java.lang.String\ getCommandWord()
+comment2.text=\n\ R\u00E9cup\u00E8re\ le\ premier\ mot\ de\ la\ commande\n\ @return\ premier\ mot\ de\ la\ commande\n
+comment3.params=
+comment3.target=java.lang.String\ getSecondWord()
+comment3.text=\n\ R\u00E9cup\u00E8re\ le\ second\ mot\ de\ la\ commande\n\ @return\ second\ mot\ de\ la\ commande\n
+comment4.params=
+comment4.target=boolean\ hasSecondWord()
+comment4.text=\n\ Permet\ de\ savoir\ si\ la\ commande\ \u00E0\ un\ second\ mot\n\ \n\ @return\ true\ si\ la\ commande\ a\ un\ second\ mot\ sinon\ false\n
+comment5.params=
+comment5.target=boolean\ isUnknown()
+comment5.text=\n\ Permet\ de\ savoir\ si\ la\ commande\ est\ inconnue\n\ \n\ @return\ true\ si\ la\ commande\ est\ inconnue\ sinno\ false\n
+numComments=6
