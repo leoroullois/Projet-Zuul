@@ -78,14 +78,14 @@ public class Game {
     /**
      * Affiche un message pour nous informer de l'endroit où l'on se trouve.
      */
-    public void printLocationInfo() {
+    private void printLocationInfo() {
         System.out.println(this.aCurrentRoom.getLongDescription());
     }
 
     /**
      * Affiche le message de bienvenue
      */
-    public void printWelcome() {
+    private void printWelcome() {
         System.out.println("Welcome to the Trade Infinity Game!");
         System.out.println("World of Blockchains is a new, incredibly boring trading and investing game.");
         System.out.println("Type 'help' if you need help.");

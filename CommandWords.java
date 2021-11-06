@@ -14,7 +14,10 @@ public class CommandWords {
         }
         return false;
     } // isCommand()
-
+    /**
+     * Liste des commandes
+     * @return la liste des commandes sous la forme "go quit help"
+     */
     public String getCommandList() {
         String vOutput = "";
         for (String pCommand : VALID_COMMANDS) {
