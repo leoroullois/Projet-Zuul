@@ -2,6 +2,9 @@ public class CommandWords {
     // Tableau constant qui contient toutes les commandes valides.
     private static final String[] VALID_COMMANDS = { "go", "quit", "help", "look", "buy" };
 
+    public CommandWords() {
+
+    }
     /**
      * Vérifie si un String correspond bien à une commande
      * 
@@ -19,10 +22,10 @@ public class CommandWords {
      * @return la liste des commandes sous la forme "go quit help"
      */
     public String getCommandList() {
-        String vOutput = "";
+        StringBuilder vOutput = new StringBuilder();
         for (String pCommand : VALID_COMMANDS) {
-            vOutput+=pCommand+" ";
+            vOutput.append(pCommand+" ");
         }
-        return vOutput;
+        return vOutput.toString();
     }
 } // CommandWords

@@ -19,25 +19,25 @@ public class GameEngine {
     private void createRooms() {
         this.aAllRooms = new HashMap<String, Room>();
 
-        Room vBitcoin = new Room("outside the main entrance of the crypto world");
+        Room vBitcoin = new Room("outside the main entrance of the crypto world","img/bitcoin.png");
         this.aAllRooms.put("Bitcoin", vBitcoin);
-        Room vEthereum = new Room("in the room wich is the beginning of smart contracts");
+        Room vEthereum = new Room("in the second greatest empire of the world of crypto","img/ethereum.png");
         this.aAllRooms.put("Ethereum", vEthereum);
-        Room vShitCoin = new Room("in the shit coin hall");
+        Room vShitCoin = new Room("in the shit coin hall","img/shitcoin.png");
         this.aAllRooms.put("ShitCoin", vShitCoin);
-        Room vHackLab = new Room("in a computing lab");
+        Room vHackLab = new Room("in a computing lab","img/hacklab.png");
         this.aAllRooms.put("HackLab", vHackLab);
-        Room vTrading = new Room("in a computing office");
+        Room vTrading = new Room("in a computing office","img/trading.png");
         this.aAllRooms.put("Trading", vTrading);
-        Room vICO = new Room("in the ICO paradize");
+        Room vICO = new Room("in the ICO paradize","img/ico.png");
         this.aAllRooms.put("ICO", vICO);
-        Room vDefiBSC = new Room("in the DEFI BSC department");
+        Room vDefiBSC = new Room("in the DEFI BSC department","img/defi_bsc.png");
         this.aAllRooms.put("DefiBSC", vDefiBSC);
-        Room vDefiETH = new Room("in the DEFI ETH department");
+        Room vDefiETH = new Room("in the DEFI ETH department","img/defi_eth.png");
         this.aAllRooms.put("DefiETH", vDefiETH);
-        Room vMining = new Room("in the mining room");
+        Room vMining = new Room("in the mining room","img/mining.png");
         this.aAllRooms.put("Mining", vMining);
-        Room vNFT = new Room("in the NFT hall");
+        Room vNFT = new Room("in the NFT hall","img/nft.png");
         this.aAllRooms.put("NFT", vNFT);
 
         // ! Pour l'instant tous les passages sont à double sens
@@ -78,7 +78,7 @@ public class GameEngine {
         this.aCurrentRoom = vBitcoin;
     }
 
-    private void setGUI(final UserInterface pUserInterface) {
+    public void setGUI(final UserInterface pUserInterface) {
         this.aGui = pUserInterface;
         this.printWelcome();
     }
@@ -145,6 +145,7 @@ public class GameEngine {
             this.aGui.println("Quit what ??");
             return false;
         } else {
+            this.endGame();
             return true;
         }
     }
