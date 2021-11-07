@@ -4,12 +4,17 @@ import java.util.Set;
 public class Room {
     private String aDescription;
     private HashMap<String, Room> aExits;
+    private String aImageName;
 
-    public Room(final String pDescription) {
+    public Room(final String pDescription,final String pImageName) {
         this.aDescription = pDescription;
         this.aExits = new HashMap<String, Room>();
+        this.aImageName=pImageName;
     }
 
+    public String getImageName() {
+        return this.aImageName;
+    }
     /**
      * Récupère la description de la salle actuelle
      * 
