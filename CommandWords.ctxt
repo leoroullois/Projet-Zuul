@@ -1,8 +1,11 @@
 #BlueJ class context
 comment0.target=CommandWords
-comment1.params=pString
-comment1.target=boolean\ isCommand(java.lang.String)
-comment1.text=\n\ V\u00E9rifie\ si\ un\ String\ correspond\ bien\ \u00E0\ une\ commande\n\ \n\ @return\ true\ si\ le\ String\ correspond\ \u00E0\ une\ commande\ valide.\n
-comment2.params=
-comment2.target=java.lang.String\ getCommandList()
-numComments=3
+comment1.params=
+comment1.target=CommandWords()
+comment2.params=pString
+comment2.target=boolean\ isCommand(java.lang.String)
+comment2.text=\n\ V\u00E9rifie\ si\ un\ String\ correspond\ bien\ \u00E0\ une\ commande\n\ \n\ @return\ true\ si\ le\ String\ correspond\ \u00E0\ une\ commande\ valide.\n
+comment3.params=
+comment3.target=java.lang.String\ getCommandList()
+comment3.text=\n\ Liste\ des\ commandes\n\ @return\ la\ liste\ des\ commandes\ sous\ la\ forme\ "go\ quit\ help"\n
+numComments=4

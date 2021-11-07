@@ -21,22 +21,31 @@ public class GameEngine {
 
         Room vBitcoin = new Room("outside the main entrance of the crypto world","img/bitcoin.png");
         this.aAllRooms.put("Bitcoin", vBitcoin);
+
         Room vEthereum = new Room("in the second greatest empire of the world of crypto","img/ethereum.png");
         this.aAllRooms.put("Ethereum", vEthereum);
+
         Room vShitCoin = new Room("in the shit coin hall","img/shitcoin.png");
         this.aAllRooms.put("ShitCoin", vShitCoin);
+
         Room vHackLab = new Room("in a computing lab","img/hacklab.png");
         this.aAllRooms.put("HackLab", vHackLab);
+
         Room vTrading = new Room("in a computing office","img/trading.png");
         this.aAllRooms.put("Trading", vTrading);
+
         Room vICO = new Room("in the ICO paradize","img/ico.png");
         this.aAllRooms.put("ICO", vICO);
+
         Room vDefiBSC = new Room("in the DEFI BSC department","img/defi_bsc.png");
         this.aAllRooms.put("DefiBSC", vDefiBSC);
+
         Room vDefiETH = new Room("in the DEFI ETH department","img/defi_eth.png");
         this.aAllRooms.put("DefiETH", vDefiETH);
+
         Room vMining = new Room("in the mining room","img/mining.png");
         this.aAllRooms.put("Mining", vMining);
+
         Room vNFT = new Room("in the NFT hall","img/nft.png");
         this.aAllRooms.put("NFT", vNFT);
 
