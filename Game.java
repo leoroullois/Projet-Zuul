@@ -1,6 +1,10 @@
+import java.util.HashMap;
+import java.util.Set;
+
 public class Game {
     private Room aCurrentRoom;
     private Parser aParser;
+    private HashMap<String,Room> aAllRooms;
 
     public Game() {
         this.createRooms();
@@ -11,16 +15,29 @@ public class Game {
      * actuelle (Bitcoin), et enfin, lis le clavier
      */
     private void createRooms() {
+        this.aAllRooms = new HashMap<String,Room>();
+
         Room vBitcoin = new Room("outside the main entrance of the crypto world");
+        this.aAllRooms.put("Bitcoin",vBitcoin);
         Room vEthereum = new Room("in the room wich is the beginning of smart contracts");
+        this.aAllRooms.put("Ethereum",vEthereum);
         Room vShitCoin = new Room("in the shit coin hall");
+        this.aAllRooms.put("ShitCoin",vShitCoin);
         Room vHackLab = new Room("in a computing lab");
+        this.aAllRooms.put("HackLab",vHackLab);
         Room vTrading = new Room("in a computing office");
+        this.aAllRooms.put("Trading",vTrading);
         Room vICO = new Room("in the ICO paradize");
+        this.aAllRooms.put("ICO",vICO);
         Room vDefiBSC = new Room("in the DEFI BSC department");
+        this.aAllRooms.put("DefiBSC",vDefiBSC);
         Room vDefiETH = new Room("in the DEFI ETH department");
+        this.aAllRooms.put("DefiETH",vDefiETH);
         Room vMining = new Room("in the mining room");
+        this.aAllRooms.put("Mining",vMining);
         Room vNFT = new Room("in the NFT hall");
+        this.aAllRooms.put("NFT",vNFT);
+
 
         // ! Pour l'instant tous les passages sont à double sens
         vBitcoin.setExit("north", vEthereum);
@@ -88,6 +105,12 @@ public class Game {
     private void printWelcome() {
         System.out.println("Welcome to the Trade Infinity Game!");
         System.out.println("World of Blockchains is a new, incredibly boring trading and investing game.");
+        String vAllRooms = "All rooms :";
+        Set<String> allKeys = this.aAllRooms.keySet();
+        for (String vKey : allKeys) {
+            vAllRooms+=" "+vKey;
+        }
+        System.out.println(vAllRooms);
         System.out.println("Type 'help' if you need help.");
         this.printLocationInfo();
     }

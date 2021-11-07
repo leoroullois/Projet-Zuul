@@ -58,12 +58,15 @@ public class Room {
      * @return Liste de toutes les sorties : "Exits : north east south down" par
      *         exemple.
      */
-    public String getExitString() {
+    public StringBuilder getExitString() {
         String vOutput = "Exits :";
+        StringBuilder vSb = new StringBuilder(vOutput);
         Set<String> allKeys = this.aExits.keySet();
         for (String vKey : allKeys) {
-            vOutput += " " + vKey;
+            // vOutput += " " + vKey;
+            vSb.append(" ");
+            vSb.append(vKey);
         }
-        return vOutput;
+        return vSb;
     }
 } // Room
