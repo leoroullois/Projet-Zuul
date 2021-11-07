@@ -63,7 +63,6 @@ public class Room {
         StringBuilder vSb = new StringBuilder(vOutput);
         Set<String> allKeys = this.aExits.keySet();
         for (String vKey : allKeys) {
-            // vOutput += " " + vKey;
             vSb.append(" ");
             vSb.append(vKey);
         }
