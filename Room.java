@@ -5,11 +5,13 @@ public class Room {
     private String aDescription;
     private HashMap<String, Room> aExits;
     private String aImageName;
+    private Item aItem;
 
     public Room(final String pDescription,final String pImageName) {
         this.aDescription = pDescription;
         this.aExits = new HashMap<String, Room>();
         this.aImageName=pImageName;
+        this.aItem=null;
     }
 
     public String getImageName() {
@@ -30,7 +32,7 @@ public class Room {
      * @return longue description
      */
     public String getLongDescription() {
-        return "You are " + this.aDescription + ".\n" + this.getExitString();
+        return "You are " + this.aDescription + ".\n" + this.getExitString()+"\n"+this.getItemString();
     }
 
     /**
@@ -72,5 +74,12 @@ public class Room {
             vSb.append(vKey);
         }
         return vSb.toString();
+    }
+
+    public void setItem(final Item pItem) {
+        this.aItem = pItem;
+    }
+    public String getItemString() {
+        return "This item represent "+this.aItem.getDescription();
     }
 } // Room

@@ -21,6 +21,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
 
 import java.net.URL;
+// import java.awt.image.*;
 
 /**
  * This class implements a simple graphical user interface with a text entry

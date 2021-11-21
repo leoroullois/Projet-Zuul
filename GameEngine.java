@@ -18,11 +18,17 @@ public class GameEngine {
      */
     private void createRooms() {
         this.aAllRooms = new HashMap<String, Room>();
-
+        // Items
+        Item vBitcoinItem = new Item("a bitcoin.", 60000);
+        Item vEthereumItem = new Item("an ethereum.", 4000);
+        
+        // Rooms
         Room vBitcoin = new Room("outside the main entrance of the crypto world", "img/bitcoin.png");
+        vBitcoin.setItem(vBitcoinItem);
         this.aAllRooms.put("Bitcoin", vBitcoin);
 
         Room vEthereum = new Room("in the second greatest empire of the world of crypto", "img/ethereum.png");
+        vEthereum.setItem(vEthereumItem);
         this.aAllRooms.put("Ethereum", vEthereum);
 
         Room vShitCoin = new Room("in the shit coin hall", "img/shitcoin.png");
