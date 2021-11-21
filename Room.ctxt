@@ -19,4 +19,6 @@ comment6.text=\n\ Retourne\ la\ salle\ qui\ se\ trouve\ dans\ la\ direction\ don
 comment7.params=
 comment7.target=java.lang.String\ getExitString()
 comment7.text=\n\ Retourne\ une\ chaine\ de\ caract\u00E8re\ qui\ liste\ toutes\ les\ sorties\ de\ la\ salle.\n\ \n\ @return\ Liste\ de\ toutes\ les\ sorties\ \:\ "Exits\ \:\ north\ east\ south\ down"\ par\n\ \ \ \ \ \ \ \ \ exemple.\n
-numComments=8
+comment8.params=pItem
+comment8.target=void\ addItem(Item)
+numComments=9

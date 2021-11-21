@@ -5,13 +5,13 @@ public class Room {
     private String aDescription;
     private HashMap<String, Room> aExits;
     private String aImageName;
-    private Item aItem;
+    private HashMap<String,Item> aItems;
 
     public Room(final String pDescription,final String pImageName) {
         this.aDescription = pDescription;
         this.aExits = new HashMap<String, Room>();
         this.aImageName=pImageName;
-        this.aItem=null;
+        this.aItems = new HashMap<String,Item>();
     }
 
     public String getImageName() {
@@ -32,7 +32,21 @@ public class Room {
      * @return longue description
      */
     public String getLongDescription() {
-        return "You are " + this.aDescription + ".\n" + this.getExitString()+"\n"+this.getItemString();
+        String vOutput = "You are " + this.aDescription + ".\n" + this.getExitString()+"\n";
+        String vAllItems = "Items :";
+        StringBuilder vSb = new StringBuilder(vAllItems);
+        Set<String> allKeys = this.aItems.keySet();
+        for (String vKey : allKeys) {
+            vSb.append(" ");
+            vSb.append(vKey);
+        }
+        vAllItems = vSb.toString();
+        if (vAllItems.equals("Items :")) {
+            vOutput+="No item here.";
+        } else {
+            vOutput+=vAllItems;
+        }
+        return vOutput;
     }
 
     /**
@@ -76,10 +90,11 @@ public class Room {
         return vSb.toString();
     }
 
-    public void setItem(final Item pItem) {
-        this.aItem = pItem;
+    public void addItem(final Item pItem) {
+        this.aItems.put(pItem.getName(),pItem);
     }
-    public String getItemString() {
-        return "This item represent "+this.aItem.getDescription();
+    public HashMap<String,Item> getItems() {
+        return this.aItems;
     }
+    
 } // Room
