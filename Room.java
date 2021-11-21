@@ -13,7 +13,10 @@ public class Room {
         this.aImageName=pImageName;
         this.aItems = new HashMap<String,Item>();
     }
-
+    /**
+     * Retourne le nom de l'image de la salle
+     * @return nom de l'image
+     */
     public String getImageName() {
         return this.aImageName;
     }
@@ -89,7 +92,10 @@ public class Room {
         }
         return vSb.toString();
     }
-
+    /**
+     * Ajoute un item à la HashMap qui répertorie tous les items de la salle
+     * @param pItem item à ajouter
+     */
     public void addItem(final Item pItem) {
         this.aItems.put(pItem.getName(),pItem);
     }

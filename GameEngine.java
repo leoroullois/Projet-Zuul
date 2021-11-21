@@ -1,8 +1,9 @@
 import java.util.HashMap;
 import java.util.Set;
+import java.util.Stack;
 
 public class GameEngine {
-    private Room aPrevRoom;
+    private Stack<Room> aPrevRooms;
     private Room aCurrentRoom;
     private Parser aParser;
     private UserInterface aGui;
@@ -104,7 +105,8 @@ public class GameEngine {
         vMining.setExit("east", vBitcoin);
 
         vNFT.setExit("east", vDefiBSC);
-        this.aPrevRoom = vBitcoin;
+
+        this.aPrevRooms = new Stack<Room>();
         this.aCurrentRoom = vBitcoin;
     }
 
@@ -155,7 +157,7 @@ public class GameEngine {
             } else if (vCommand.getCommandWord().equals("buy")) {
                 this.buy(vCommand);
             } else if (vCommand.getCommandWord().equals("back")) {
-                this.back();
+                this.back(vCommand);
             }
 
             if (vCommand.getCommandWord().equals("quit")) {
@@ -243,7 +245,7 @@ public class GameEngine {
             this.aGui.println("There is no door !");
             return;
         } else {
-            this.aPrevRoom=this.aCurrentRoom;
+            this.aPrevRooms.push(this.aCurrentRoom);
             this.aCurrentRoom = vNextRoom;
             this.printLocationInfo();
         }
@@ -252,12 +254,23 @@ public class GameEngine {
         }
     }
 
-    private void back() {
-        Room vRoom = this.aCurrentRoom;
-        this.aCurrentRoom=this.aPrevRoom;
-        this.aPrevRoom=vRoom;
-        if (this.aCurrentRoom.getImageName() != null) {
-            this.aGui.showImage(this.aCurrentRoom.getImageName());
+    /**
+     * Permet de retourner dans les salles précédentes
+     * @param pCommand  commande tapée au clavier
+     */
+    private void back(final Command pCommand) {
+        if (pCommand.hasSecondWord()) {
+            this.aGui.println("I don't understand what you are saying.");
+        } else {
+            if (!this.aPrevRooms.empty()) {
+                this.aCurrentRoom=this.aPrevRooms.pop();
+                this.printLocationInfo();
+            } else {
+                this.aGui.println("There are no previous room.");
+            }
+            if (this.aCurrentRoom.getImageName() != null) {
+                this.aGui.showImage(this.aCurrentRoom.getImageName());
+            }
         }
     }
     private void endGame() {
