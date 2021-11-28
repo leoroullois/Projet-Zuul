@@ -2,6 +2,12 @@ import java.util.HashMap;
 import java.util.Set;
 import java.util.Stack;
 
+// Lecture de fichier
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 public class GameEngine {
     private Stack<Room> aPrevRooms;
     private Room aCurrentRoom;
@@ -22,10 +28,10 @@ public class GameEngine {
 
         this.aAllRooms = new HashMap<String, Room>();
         // Items
-        Item vCpu1 = new Item("cpu1", "a CPU that provide you calcul power for mining.",500);
-        Item vCpu2 = new Item("cpu2", "a CPU that provide you calcul power for mining",1000);
+        Item vCpu1 = new Item("cpu1", "a CPU that provide you calcul power for mining.", 500);
+        Item vCpu2 = new Item("cpu2", "a CPU that provide you calcul power for mining", 1000);
 
-        Item vKeyDefi = new Item("key","a key that aims you open the defi room.",0);
+        Item vKeyDefi = new Item("key", "a key that aims you open the defi room.", 0);
 
         Item vShiba = new Item("shiba", "a shiba that helps you pump the Shiba INU", 300);
         Item vDoge = new Item("doge", "a dog that helps youu pump the Doge Coin.", 300);
@@ -157,6 +163,8 @@ public class GameEngine {
                 this.buy(vCommand);
             } else if (vCommand.getCommandWord().equals("back")) {
                 this.back(vCommand);
+            } else if (vCommand.getCommandWord().equals("test")) {
+                this.test(vCommand);
             }
 
             if (vCommand.getCommandWord().equals("quit")) {
@@ -175,7 +183,7 @@ public class GameEngine {
         if (pQuit.hasSecondWord()) {
             this.aGui.println("Quit what ??");
         } else {
-            this.aGui.disableButtons(); 
+            this.aGui.disableButtons();
             this.endGame();
         }
     }
@@ -252,14 +260,15 @@ public class GameEngine {
 
     /**
      * Permet de retourner dans les salles précédentes
-     * @param pCommand  commande tapée au clavier
+     * 
+     * @param pCommand commande tapée au clavier
      */
     private void back(final Command pCommand) {
         if (pCommand.hasSecondWord()) {
             this.aGui.println("I don't understand what you are saying.");
         } else {
             if (!this.aPrevRooms.empty()) {
-                this.aCurrentRoom=this.aPrevRooms.pop();
+                this.aCurrentRoom = this.aPrevRooms.pop();
                 this.printLocationInfo();
             } else {
                 this.aGui.println("There are no previous room.");
@@ -269,6 +278,28 @@ public class GameEngine {
             }
         }
     }
+
+    private void test(final Command pCommand) {
+        if (!pCommand.hasSecondWord()) {
+            this.aGui.println("What file do you want for the test ?");
+        } else {
+            Scanner myFile = null;
+            try {
+                myFile = new Scanner(new BufferedReader(new FileReader("tests/"+pCommand.getSecondWord() + ".txt")));
+                while (myFile.hasNext()) {
+                    String aLigne = myFile.nextLine();
+                    this.interpretCommand(aLigne);
+                }
+            } catch (final FileNotFoundException e) {
+                this.aGui.println("Error : " + e.getMessage());
+            } finally {
+                if (myFile != null) {
+                    myFile.close();
+                }
+            }
+        }
+    }
+
     private void endGame() {
         this.aGui.println("Thank you for playing.  Good bye.");
         this.aGui.enable(false);

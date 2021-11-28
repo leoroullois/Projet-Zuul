@@ -1,6 +1,6 @@
 public class CommandWords {
     // Tableau constant qui contient toutes les commandes valides.
-    private static final String[] VALID_COMMANDS = { "go", "quit", "help", "look", "buy","back" };
+    private static final String[] VALID_COMMANDS = { "go", "quit", "help", "look", "buy","back","test" };
 
     public CommandWords() {
 
