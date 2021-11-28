@@ -140,13 +140,12 @@ public class GameEngine {
      * @param pCommand la commande a check
      * @return true ou false en fonction de si la commande est valide
      */
-    public boolean interpretCommand(final String pCommandLine) {
+    public void interpretCommand(final String pCommandLine) {
         this.aGui.println("> " + pCommandLine);
         Command vCommand = this.aParser.getCommand(pCommandLine);
 
         if (vCommand.isUnknown()) {
             this.aGui.println("I don't know what you mean...");
-            return false;
         } else {
             if (vCommand.getCommandWord().equals("go")) {
                 this.goRoom(vCommand);
@@ -161,9 +160,7 @@ public class GameEngine {
             }
 
             if (vCommand.getCommandWord().equals("quit")) {
-                return quit(vCommand);
-            } else {
-                return false;
+                quit(vCommand);
             }
         }
     }
@@ -174,13 +171,12 @@ public class GameEngine {
      * @param pQuit commande quit
      * @return true si on quitte le jeu sinon false
      */
-    private boolean quit(final Command pQuit) {
+    private void quit(final Command pQuit) {
         if (pQuit.hasSecondWord()) {
             this.aGui.println("Quit what ??");
-            return false;
         } else {
+            this.aGui.disableButtons(); 
             this.endGame();
-            return true;
         }
     }
 

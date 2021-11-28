@@ -8,7 +8,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
-
+import java.awt.GridLayout;
+import java.util.HashMap;
+import java.util.Set;
 // import javax.swing.SwingUtilities;
 // import java.awt.*;
 import java.awt.Dimension;
@@ -36,7 +38,8 @@ public class UserInterface implements ActionListener {
     private JTextField aEntryField;
     private JTextArea aLog;
     private JLabel aImage;
-    private JButton aButton;
+    private HashMap<String,JButton> aButtons;
+    private JPanel aPanelButtons;
 
     /**
      * Construct a UserInterface. As a parameter, a Game Engine (an object
@@ -45,6 +48,9 @@ public class UserInterface implements ActionListener {
      * @param gameEngine The GameEngine object implementing the game logic.
      */
     public UserInterface(final GameEngine pGameEngine) {
+        this.aButtons = new HashMap<String,JButton>();
+        this.aPanelButtons = new JPanel();
+        aPanelButtons.setLayout(new GridLayout(2,1));
         this.aEngine = pGameEngine;
         this.createGUI();
     } // UserInterface(.)
@@ -96,7 +102,10 @@ public class UserInterface implements ActionListener {
     private void createGUI() {
         this.aMyFrame = new JFrame("Trade Infinity Game !"); // change the title
         this.aEntryField = new JTextField(34);
-        this.aButton = new JButton("Buy Bitcoin");
+        JButton bitcoinBtn = new JButton("Buy Bitcoin");
+        JButton quitButton = new JButton("Quit");
+        this.aButtons.put("bitcoin",bitcoinBtn);
+        this.aButtons.put("quit",quitButton);
 
         this.aLog = new JTextArea();
         this.aLog.setEditable(false);
@@ -111,13 +120,18 @@ public class UserInterface implements ActionListener {
         vPanel.add(this.aImage, BorderLayout.NORTH);
         vPanel.add(vListScroller, BorderLayout.CENTER);
         vPanel.add(this.aEntryField, BorderLayout.SOUTH);
-        vPanel.add(this.aButton,BorderLayout.EAST);
 
+        Set<String> allKeys = this.aButtons.keySet();
+        for(String vKey : allKeys) {
+            this.aPanelButtons.add(this.aButtons.get(vKey));
+            this.aButtons.get(vKey).addActionListener(this);
+        }
+        
+        vPanel.add(this.aPanelButtons,BorderLayout.EAST);
         this.aMyFrame.getContentPane().add(vPanel, BorderLayout.CENTER);
 
         // add some event listeners to some components
         this.aEntryField.addActionListener(this);
-        this.aButton.addActionListener(this);
         // to end program when window is closed
         this.aMyFrame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
@@ -136,11 +150,19 @@ public class UserInterface implements ActionListener {
     public void actionPerformed(final ActionEvent pE) {
         if (pE.getActionCommand()=="Buy Bitcoin") {
             this.aEngine.interpretCommand("buy bitcoin");
+        } else if (pE.getActionCommand()=="Quit") {
+            this.aEngine.interpretCommand("quit");
         } else {
             this.processCommand();
         }
     } // actionPerformed(.)
 
+    public void disableButtons() {
+        Set<String> allButtons = this.aButtons.keySet();
+        for (String vButton : allButtons) {
+            this.aButtons.get(vButton).setEnabled(false);
+        }
+    }
     /**
      * A command has been entered. Read the command and do whatever is necessary to
      * process it.
