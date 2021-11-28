@@ -1,0 +1,17 @@
+#BlueJ class context
+comment0.target=Player
+comment1.params=pRoom
+comment1.target=Player(Room)
+comment2.params=
+comment2.target=int\ getBalance()
+comment3.params=aBalance
+comment3.target=void\ setBalance(int)
+comment4.params=
+comment4.target=Room\ getCurrentRoom()
+comment5.params=pRoom
+comment5.target=void\ setCurrentRoom(Room)
+comment6.params=
+comment6.target=java.util.HashMap\ getItems()
+comment7.params=
+comment7.target=java.util.Stack\ getPrevRooms()
+numComments=8
