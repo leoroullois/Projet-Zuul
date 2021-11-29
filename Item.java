@@ -8,6 +8,7 @@ public class Item {
         this.aDescription = pDescription;
         this.aPrice = pPrice;
     }
+
     // Getters et setters
     public String getDescription() {
         return this.aDescription;
@@ -24,11 +25,12 @@ public class Item {
     public void setPrice(final double pPrice) {
         this.aPrice = pPrice;
     }
+
     public String getName() {
         return this.aName;
     }
+
     public String getItemString(final String pName) {
         return this.aDescription;
     }
-
 }
