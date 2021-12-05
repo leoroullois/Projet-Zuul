@@ -168,10 +168,13 @@ public class GameEngine {
                 this.take(vCommand);
             } else if (vCommand.getCommandWord().equals("drop")) {
                 this.drop(vCommand);
+            } else if(vCommand.getCommandWord().equals("items")) {
+                this.items(vCommand);
+            } else if (vCommand.getCommandWord().equals("eat")) {
+                this.eat(vCommand);
             }
-
             if (vCommand.getCommandWord().equals("quit")) {
-                quit(vCommand);
+                this.quit(vCommand);
             }
         }
     }
@@ -199,8 +202,8 @@ public class GameEngine {
      */
     private void look(final Command pCommand) {
         if (pCommand.hasSecondWord()) {
-            if (pCommand.getSecondWord().equals("items")) {
-                this.aGui.println(this.aPlayer.lookItems());
+            if (pCommand.getSecondWord().equals("wallet")) {
+                this.aGui.println(this.aPlayer.getBalanceString());
             } else {
                 Boolean vTest = false;
                 Set<String> allKeys = this.aPlayer.getCurrentRoom().getItems().keySet();
@@ -220,7 +223,12 @@ public class GameEngine {
             this.aGui.println(this.aPlayer.getCurrentRoom().getLongDescription());
         }
     }
-
+    private void eat(final Command pCommand) {
+        this.aGui.println(this.aPlayer.eatCake(pCommand));
+    }
+    private void items(final Command pCommand) {
+        this.aGui.println(this.aPlayer.lookItems());
+    }
     /**
      * Défini l'action de la commande buy
      * 

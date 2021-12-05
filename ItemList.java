@@ -7,7 +7,12 @@ public class ItemList {
     public ItemList() {
         this.aItems = new HashMap<String, Item>();
     }
-
+    public Item getItem(final String pName) {
+        return this.aItems.get(pName);
+    }
+    public double getPrice(final String pName) {
+        return this.aItems.get(pName).getPrice();
+    }
     public HashMap<String, Item> getItems() {
         return this.aItems;
     }
@@ -25,8 +30,9 @@ public class ItemList {
         StringBuilder vSb = new StringBuilder(vAllItems);
         Set<String> allKeys = this.aItems.keySet();
         for (String vKey : allKeys) {
-            vSb.append(" ");
+            vSb.append("\n- ");
             vSb.append(vKey);
+            vSb.append(" ("+this.aItems.get(vKey).getPrice()+"$)");
         }
         return vSb.toString();
     }

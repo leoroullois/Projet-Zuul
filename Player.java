@@ -1,23 +1,24 @@
 import java.util.HashMap;
 import java.util.Stack;
+import java.util.Set;
 
 public class Player {
     private Room aCurrentRoom;
     private ItemList aItems;
-    private int aBalance;
+    private double aBalance;
     private Stack<Room> aPrevRooms;
     private String aName;
 
     public Player(Room pRoom) {
         this.aCurrentRoom = pRoom;
         this.aItems = new ItemList();
-        this.aBalance = 10000;
+        this.aBalance = 500;
         this.aPrevRooms = new Stack<Room>();
         this.aName = "Laylow";
     }
 
     // Getters & setters
-    public int getBalance() {
+    public double getBalance() {
         return this.aBalance;
     }
 
@@ -62,9 +63,14 @@ public class Player {
     public String takeItem(final String pName) {
         Item vItem = this.aCurrentRoom.getItems().get(pName);
         if (vItem != null) {
-            this.aCurrentRoom.getItems().remove(pName);
-            this.aItems.getItems().put(pName, vItem);
-            return "You've just taked the " + pName;
+            if (this.aBalance >= vItem.getPrice()) {
+                this.aCurrentRoom.getItems().remove(pName);
+                this.aItems.getItems().put(pName, vItem);
+                this.aBalance -= this.aItems.getPrice(pName);
+                return "You've just taked the " + pName;
+            } else {
+                return "You don't have enough money. You're poor.";
+            }
         } else {
             return "There are no item named " + pName + "in " + this.aCurrentRoom;
         }
@@ -92,5 +98,31 @@ public class Player {
         } else {
             return "Your items are :" + vItems;
         }
+    }
+
+    public String getBalanceString() {
+        return "You have : " + this.aBalance + "$ in your wallet.";
+    }
+
+    public String eatCake(final Command pCommand) {
+        if(!pCommand.hasSecondWord()) {
+            return "Eat what ?";
+        }
+        Set<String> allKeys = this.aItems.getItems().keySet();
+        for (String vKey : allKeys) {
+            if(pCommand.getSecondWord().equals(vKey) && !vKey.equals("cake")) {
+                return "You can't it a "+vKey+".";
+            }
+        }
+        if (pCommand.getSecondWord().equals("cake")) {
+            Item vCake = this.aItems.getItem("cake");
+            if(vCake==null) {
+                return "You don't have a cake in your inventory.";
+            } else {
+                this.aBalance*=1.20;
+                return "You eated a magic cake ! It increases your wallet balance by 20%";
+            }
+        }
+        return "Eat what ?";
     }
 }
