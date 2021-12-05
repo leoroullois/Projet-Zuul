@@ -5,13 +5,13 @@ public class Room {
     private String aDescription;
     private HashMap<String, Room> aExits;
     private String aImageName;
-    private HashMap<String,Item> aItems;
+    private ItemList aItems;
 
     public Room(final String pDescription,final String pImageName) {
         this.aDescription = pDescription;
         this.aExits = new HashMap<String, Room>();
         this.aImageName=pImageName;
-        this.aItems = new HashMap<String,Item>();
+        this.aItems = new ItemList();
     }
     /**
      * Retourne le nom de l'image de la salle
@@ -36,14 +36,7 @@ public class Room {
      */
     public String getLongDescription() {
         String vOutput = "You are " + this.aDescription + ".\n" + this.getExitString()+"\n";
-        String vAllItems = "Items :";
-        StringBuilder vSb = new StringBuilder(vAllItems);
-        Set<String> allKeys = this.aItems.keySet();
-        for (String vKey : allKeys) {
-            vSb.append(" ");
-            vSb.append(vKey);
-        }
-        vAllItems = vSb.toString();
+        String vAllItems ="Items :" + this.aItems.getItemsString();
         if (vAllItems.equals("Items :")) {
             vOutput+="No item here.";
         } else {
@@ -92,15 +85,10 @@ public class Room {
         }
         return vSb.toString();
     }
-    /**
-     * Ajoute un item à la HashMap qui répertorie tous les items de la salle
-     * @param pItem item à ajouter
-     */
     public void addItem(final Item pItem) {
-        this.aItems.put(pItem.getName(),pItem);
+        this.aItems.addItem(pItem);
     }
     public HashMap<String,Item> getItems() {
-        return this.aItems;
+        return this.aItems.getItems();
     }
-    
 } // Room

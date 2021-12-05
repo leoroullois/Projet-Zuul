@@ -22,7 +22,6 @@ comment7.target=java.lang.String\ getExitString()
 comment7.text=\n\ Retourne\ une\ chaine\ de\ caract\u00E8re\ qui\ liste\ toutes\ les\ sorties\ de\ la\ salle.\n\ \n\ @return\ Liste\ de\ toutes\ les\ sorties\ \:\ "Exits\ \:\ north\ east\ south\ down"\ par\n\ \ \ \ \ \ \ \ \ exemple.\n
 comment8.params=pItem
 comment8.target=void\ addItem(Item)
-comment8.text=\n\ Ajoute\ un\ item\ \u00E0\ la\ HashMap\ qui\ r\u00E9pertorie\ tous\ les\ items\ de\ la\ salle\n\ @param\ pItem\ item\ \u00E0\ ajouter\n
 comment9.params=
 comment9.target=java.util.HashMap\ getItems()
 numComments=10

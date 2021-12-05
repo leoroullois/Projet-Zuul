@@ -1,17 +1,16 @@
 import java.util.HashMap;
-import java.util.Set;
 import java.util.Stack;
 
 public class Player {
     private Room aCurrentRoom;
-    private HashMap<String, Item> aItems;
+    private ItemList aItems;
     private int aBalance;
     private Stack<Room> aPrevRooms;
     private String aName;
 
     public Player(Room pRoom) {
         this.aCurrentRoom = pRoom;
-        this.aItems = new HashMap<String, Item>();
+        this.aItems = new ItemList();
         this.aBalance = 10000;
         this.aPrevRooms = new Stack<Room>();
         this.aName = "Laylow";
@@ -35,7 +34,7 @@ public class Player {
     }
 
     public HashMap<String, Item> getItems() {
-        return this.aItems;
+        return this.aItems.getItems();
     }
 
     public Stack<Room> getPrevRooms() {
@@ -64,7 +63,7 @@ public class Player {
         Item vItem = this.aCurrentRoom.getItems().get(pName);
         if (vItem != null) {
             this.aCurrentRoom.getItems().remove(pName);
-            this.aItems.put(pName, vItem);
+            this.aItems.getItems().put(pName, vItem);
             return "You've just taked the " + pName;
         } else {
             return "There are no item named " + pName + "in " + this.aCurrentRoom;
@@ -72,9 +71,9 @@ public class Player {
     }
 
     public String dropItem(final String pName) {
-        Item vItem = this.aItems.get(pName);
+        Item vItem = this.aItems.getItems().get(pName);
         if (vItem != null) {
-            this.aItems.remove(pName);
+            this.aItems.removeItem(pName);
             this.aCurrentRoom.getItems().put(pName, vItem);
             return vItem.getName() + " dropped.";
         } else {
@@ -83,12 +82,7 @@ public class Player {
     }
 
     public String getItemsString() {
-        String vOutput = "";
-        Set<String> allItems = this.aItems.keySet();
-        for (String vItem : allItems) {
-            vOutput += " " + vItem;
-        }
-        return vOutput;
+        return this.aItems.getItemsString();
     }
 
     public String lookItems() {
