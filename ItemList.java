@@ -24,7 +24,10 @@ public class ItemList {
     public void removeItem(final String pName) {
         this.aItems.remove(pName);
     }
-
+    /**
+     * Informations sur les items
+     * @return Les items suivis de leur prix
+     */
     public String getItemsString() {
         String vAllItems = "";
         StringBuilder vSb = new StringBuilder(vAllItems);

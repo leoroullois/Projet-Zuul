@@ -59,7 +59,11 @@ public class Player {
     public void goBack() {
         this.aCurrentRoom = this.aPrevRooms.pop();
     }
-
+    /**
+     * Pour prendre une item dans une salle
+     * @param pName l'item en question
+     * @return Informations sur le résultat (échec de la prise, ...)
+     */
     public String takeItem(final String pName) {
         Item vItem = this.aCurrentRoom.getItems().get(pName);
         if (vItem != null) {
@@ -75,7 +79,11 @@ public class Player {
             return "There are no item named " + pName + "in " + this.aCurrentRoom;
         }
     }
-
+    /**
+     * Pour déposer un item dans une salle.
+     * @param pName l'item en question
+     * @return Informations sur le résultat (échec du dépot, ...)
+     */
     public String dropItem(final String pName) {
         Item vItem = this.aItems.getItems().get(pName);
         if (vItem != null) {
@@ -90,7 +98,10 @@ public class Player {
     public String getItemsString() {
         return this.aItems.getItemsString();
     }
-
+    /**
+     * Pour afficher l'inventaire
+     * @return  string contenant tous les items dans votre inventaire.
+     */
     public String lookItems() {
         String vItems = this.getItemsString();
         if (vItems.equals("")) {
@@ -103,7 +114,11 @@ public class Player {
     public String getBalanceString() {
         return "You have : " + this.aBalance + "$ in your wallet.";
     }
-
+    /**
+     * Fonction pour manger le gâteau magique
+     * @param pCommand commande eat item
+     * @return chaine de caractère nous informant de si le gâteau a été manger ou non...
+     */
     public String eatCake(final Command pCommand) {
         if(!pCommand.hasSecondWord()) {
             return "Eat what ?";

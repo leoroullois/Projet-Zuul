@@ -197,7 +197,7 @@ public class GameEngine {
     /**
      * Défini l'action de la commande look :
      * look : donne des informations sur la salle actuelle, les items présents à l'intérieur et les sorties.
-     * look items : donne la liste des items que le joueur possède.
+     * look wallet : affiche l'argent du joueur.
      * @param pCommand commande look
      */
     private void look(final Command pCommand) {
@@ -295,7 +295,10 @@ public class GameEngine {
             }
         }
     }
-
+    /**
+     * Test le jeu à partir d'un fichier texte contenant les commandes voulues.
+     * @param pCommand commande test fichier pour tester le jeu avec les commandes dans fichier.txt
+     */
     private void test(final Command pCommand) {
         if (!pCommand.hasSecondWord()) {
             this.aGui.println("What file do you want for the test ?");
@@ -316,7 +319,10 @@ public class GameEngine {
             }
         }
     }
-
+    /**
+     * Permet au joueur de prendre un item dans son iventaire.
+     * @param pCommand take item
+     */
     public void take(final Command pCommand) {
         if (pCommand.hasSecondWord()) {
             String vOutput = this.aPlayer.takeItem(pCommand.getSecondWord());
@@ -325,7 +331,10 @@ public class GameEngine {
             this.aGui.println("Take what ?");
         }
     }
-
+    /**
+     * Permet au joueur de déposé un item dans la salle actuelle
+     * @param pCommand drop item
+     */
     public void drop(final Command pCommand) {
         if (pCommand.hasSecondWord()) {
             String vOutput = this.aPlayer.dropItem(pCommand.getSecondWord());
