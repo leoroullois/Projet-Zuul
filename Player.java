@@ -8,13 +8,15 @@ public class Player {
     private double aBalance;
     private Stack<Room> aPrevRooms;
     private String aName;
+    private int aTime;
 
     public Player(Room pRoom) {
         this.aCurrentRoom = pRoom;
         this.aItems = new ItemList();
-        this.aBalance = 500;
+        this.aBalance = 1000;
         this.aPrevRooms = new Stack<Room>();
         this.aName = "Laylow";
+        this.aTime=0;
     }
 
     // Getters & setters

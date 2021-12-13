@@ -38,23 +38,23 @@ public class GameEngine {
 
         Item vBollinger = new Item("bollinger", "the bollinger bands indicator", 50);
         // Rooms
-        Room vBitcoin = new Room("outside the main entrance of the crypto world", "img/bitcoin.png");
+        Room vBitcoin = new Room("outside the main entrance of the crypto world", "img/gifs/bitcoin.gif");
         vBitcoin.addItem(vKeyDefi);
         this.aAllRooms.put("Bitcoin", vBitcoin);
 
-        Room vEthereum = new Room("in the second greatest empire of the world of crypto", "img/ethereum.png");
+        Room vEthereum = new Room("in the second greatest empire of the world of crypto", "img/gifs/ethereum.gif");
         vEthereum.addItem(vCake);
         this.aAllRooms.put("Ethereum", vEthereum);
 
-        Room vShitCoin = new Room("in the shit coin hall", "img/shitcoin.png");
+        Room vShitCoin = new Room("in the shit coin hall", "img/gifs/shitcoin.gif");
         vShitCoin.addItem(vShiba);
         vShitCoin.addItem(vDoge);
         this.aAllRooms.put("ShitCoin", vShitCoin);
 
-        Room vHackLab = new Room("in a computing lab", "img/hacklab.png");
+        Room vHackLab = new Room("in a computing lab", "img/gifs/hacking.gif");
         this.aAllRooms.put("HackLab", vHackLab);
 
-        Room vTrading = new Room("in a computing office", "img/trading.png");
+        Room vTrading = new Room("in a computing office", "img/gifs/trading.gif");
         vTrading.addItem(vBollinger);
         this.aAllRooms.put("Trading", vTrading);
 
@@ -67,12 +67,12 @@ public class GameEngine {
         Room vDefiETH = new Room("in the DEFI ETH department", "img/defi_eth.png");
         this.aAllRooms.put("DefiETH", vDefiETH);
 
-        Room vMining = new Room("in the mining room", "img/mining.png");
+        Room vMining = new Room("in the mining room", "img/gifs/mining.gif");
         vMining.addItem(vCpu1);
         vMining.addItem(vCpu2);
         this.aAllRooms.put("Mining", vMining);
 
-        Room vNFT = new Room("in the NFT hall", "img/nft.png");
+        Room vNFT = new Room("in the NFT hall", "img/gifs/nft.gif");
         this.aAllRooms.put("NFT", vNFT);
 
         // ! Pour l'instant tous les passages sont à double sens

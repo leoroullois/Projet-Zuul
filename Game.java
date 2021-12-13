@@ -1,14 +1,14 @@
-public class Game {
-    private UserInterface aGui;
-    private GameEngine aEngine;
+public abstract class Game {
+    private static UserInterface aGui;
+    private static GameEngine aEngine;
 
     /**
      * Create the game and initialise its internal map. Create the inerface and link
      * to it.
      */
-    public Game() {
-        this.aEngine = new GameEngine();
-        this.aGui = new UserInterface(this.aEngine);
-        this.aEngine.setGUI(this.aGui);
+    public static void main(final String[] pArgs) {
+        Game.aEngine = new GameEngine();
+        Game.aGui = new UserInterface(Game.aEngine);
+        Game.aEngine.setGUI(Game.aGui);
     }
 }

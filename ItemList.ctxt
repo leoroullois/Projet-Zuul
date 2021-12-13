@@ -14,4 +14,5 @@ comment6.params=pName
 comment6.target=void\ removeItem(java.lang.String)
 comment7.params=
 comment7.target=java.lang.String\ getItemsString()
+comment7.text=\n\ Informations\ sur\ les\ items\n\ @return\ Les\ items\ suivis\ de\ leur\ prix\n
 numComments=8
