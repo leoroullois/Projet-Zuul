@@ -1,3 +1,9 @@
 look
 go north
 help
+take cake
+look wallet
+eat cake
+look wallet
+go north
+go east
