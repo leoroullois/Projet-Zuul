@@ -1,24 +1,46 @@
 import java.util.HashMap;
 import java.util.Stack;
 import java.util.Set;
-
+import javax.swing.Timer;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 public class Player {
     private Room aCurrentRoom;
     private ItemList aItems;
     private double aBalance;
     private Stack<Room> aPrevRooms;
     private String aName;
-    private int aTime;
-    private int maxTime;
+    
+    public final static int ONE_SECOND = 1000;
+    public final static int MAX_TIME = 10;
+    public static int TIME = 0;
+    public static Timer MY_TIMER;
 
-    public Player(Room pRoom) {
+    public Player(final Room pRoom, final GameEngine pGameEngine) {
         this.aCurrentRoom = pRoom;
         this.aItems = new ItemList();
         this.aBalance = 1000;
         this.aPrevRooms = new Stack<Room>();
         this.aName = "Laylow";
-        this.aTime=0;
-        this.maxTime=5;
+        // GAME_ENGINE=pGameEngine;
+        this.startTimer(pGameEngine);
+    }
+    public void startTimer(final GameEngine GAME_ENGINE) {
+        ActionListener taskPerformer = new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                TIME++;
+                System.out.println(TIME);
+                if(TIME==MAX_TIME) {
+                    GAME_ENGINE.interpretCommand("quit");
+                    MY_TIMER.stop();
+                }                
+            }
+        };
+        MY_TIMER = new Timer(ONE_SECOND, taskPerformer);
+        MY_TIMER.start();
+    }
+    public int test() {
+        return 99999;
     }
 
     // Getters & setters
@@ -49,15 +71,7 @@ public class Player {
     public String getName() {
         return this.aName;
     }
-    public int getTime() {
-        return this.aTime;
-    }
-    public void setTime(final int pTime) {
-        this.aTime=pTime;
-    }
-    public int getMaxTime() {
-        return this.maxTime;
-    }
+
     /**
      * Change de salle et modifie la pile des rooms
      * 
@@ -66,12 +80,10 @@ public class Player {
     public void changeRoom(Room pNextRoom) {
         this.aPrevRooms.push(this.aCurrentRoom);
         this.aCurrentRoom = pNextRoom;
-        this.aTime++;
     }
 
     public void goBack() {
         this.aCurrentRoom = this.aPrevRooms.pop();
-        this.aTime++;
     }
     /**
      * Pour prendre une item dans une salle

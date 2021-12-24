@@ -111,7 +111,7 @@ public class GameEngine {
         vNFT.setExit("east", vDefiBSC);
 
         // this.aPrevRooms = new Stack<Room>();
-        this.aPlayer = new Player(vBitcoin);
+        this.aPlayer = new Player(vBitcoin,this);
         this.aPlayer.setCurrentRoom(vBitcoin);
     }
 
@@ -175,10 +175,6 @@ public class GameEngine {
             }
             if (vCommand.getCommandWord().equals("quit")) {
                 this.quit(vCommand);
-            }
-            if (this.aPlayer.getMaxTime()==this.aPlayer.getTime()) {
-                Command vQuitCommand = this.aParser.getCommand("quit");
-                this.quit(vQuitCommand);
             }
         }
     }
