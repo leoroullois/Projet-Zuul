@@ -8,7 +8,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class GameEngine {
-       private Parser aParser;
+    private Parser aParser;
     private UserInterface aGui;
     private HashMap<String, Room> aAllRooms;
     private Player aPlayer;
@@ -175,6 +175,10 @@ public class GameEngine {
             }
             if (vCommand.getCommandWord().equals("quit")) {
                 this.quit(vCommand);
+            }
+            if (this.aPlayer.getMaxTime()==this.aPlayer.getTime()) {
+                Command vQuitCommand = this.aParser.getCommand("quit");
+                this.quit(vQuitCommand);
             }
         }
     }

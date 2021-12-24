@@ -9,6 +9,7 @@ public class Player {
     private Stack<Room> aPrevRooms;
     private String aName;
     private int aTime;
+    private int maxTime;
 
     public Player(Room pRoom) {
         this.aCurrentRoom = pRoom;
@@ -17,6 +18,7 @@ public class Player {
         this.aPrevRooms = new Stack<Room>();
         this.aName = "Laylow";
         this.aTime=0;
+        this.maxTime=5;
     }
 
     // Getters & setters
@@ -47,7 +49,15 @@ public class Player {
     public String getName() {
         return this.aName;
     }
-
+    public int getTime() {
+        return this.aTime;
+    }
+    public void setTime(final int pTime) {
+        this.aTime=pTime;
+    }
+    public int getMaxTime() {
+        return this.maxTime;
+    }
     /**
      * Change de salle et modifie la pile des rooms
      * 
@@ -56,10 +66,12 @@ public class Player {
     public void changeRoom(Room pNextRoom) {
         this.aPrevRooms.push(this.aCurrentRoom);
         this.aCurrentRoom = pNextRoom;
+        this.aTime++;
     }
 
     public void goBack() {
         this.aCurrentRoom = this.aPrevRooms.pop();
+        this.aTime++;
     }
     /**
      * Pour prendre une item dans une salle
