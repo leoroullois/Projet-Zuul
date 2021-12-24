@@ -8,7 +8,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class GameEngine {
-    private Parser aParser;
+       private Parser aParser;
     private UserInterface aGui;
     private HashMap<String, Room> aAllRooms;
     private Player aPlayer;
