@@ -81,7 +81,7 @@ public class GameEngine {
 
         vEthereum.setExit("north", vShitCoin);
         vEthereum.setExit("east", vTrading);
-        vEthereum.setExit("south", vBitcoin);
+        // vEthereum.setExit("south", vBitcoin);
         vEthereum.setExit("west", vDefiETH);
 
         vShitCoin.setExit("east", vHackLab);
@@ -283,6 +283,8 @@ public class GameEngine {
     private void back(final Command pCommand) {
         if (pCommand.hasSecondWord()) {
             this.aGui.println("I don't understand what you are saying.");
+        } else if(!this.aPlayer.getCurrentRoom().isExit(this.aPlayer.getPrevRooms().peek())) {
+            this.aGui.println("There are no door to go back.");
         } else {
             if (!this.aPlayer.getPrevRooms().empty()) {
                 this.aPlayer.goBack();

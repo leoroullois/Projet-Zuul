@@ -12,7 +12,7 @@ public class Player {
     private String aName;
     
     public final static int ONE_SECOND = 1000;
-    public final static int MAX_TIME = 10;
+    public final static int MAX_TIME = 600;
     public static int TIME = 0;
     public static Timer MY_TIMER;
 
@@ -38,9 +38,6 @@ public class Player {
         };
         MY_TIMER = new Timer(ONE_SECOND, taskPerformer);
         MY_TIMER.start();
-    }
-    public int test() {
-        return 99999;
     }
 
     // Getters & setters

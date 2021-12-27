@@ -91,4 +91,13 @@ public class Room {
     public HashMap<String,Item> getItems() {
         return this.aItems.getItems();
     }
+    public boolean isExit(final Room pRoom) {
+        Set<String> allKeys = this.aExits.keySet();
+        for(String vKey : allKeys) {
+            if(this.aExits.get(vKey).equals(pRoom)) {
+                return true;
+            }
+        }
+        return false;
+    }
 } // Room
