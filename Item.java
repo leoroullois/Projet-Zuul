@@ -2,7 +2,6 @@ public class Item {
     private String aName;
     private String aDescription;
     private double aPrice;
-
     public Item(final String pName, final String pDescription, final double pPrice) {
         this.aName = pName;
         this.aDescription = pDescription;

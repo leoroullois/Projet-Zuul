@@ -1,6 +1,8 @@
 import java.util.HashMap;
 import java.util.Set;
 
+import javax.sql.PooledConnection;
+
 // Lecture de fichier
 import java.io.FileReader;
 import java.io.BufferedReader;
@@ -37,6 +39,7 @@ public class GameEngine {
         Item vCake = new Item("cake", "a magical cake.", 500);
 
         Item vBollinger = new Item("bollinger", "the bollinger bands indicator", 50);
+        
         // Rooms
         Room vBitcoin = new Room("outside the main entrance of the crypto world", "img/gifs/bitcoin.gif");
         vBitcoin.addItem(vKeyDefi);
@@ -113,6 +116,9 @@ public class GameEngine {
         // this.aPrevRooms = new Stack<Room>();
         this.aPlayer = new Player(vBitcoin,this);
         this.aPlayer.setCurrentRoom(vBitcoin);
+
+        Beamer vBeamer = new Beamer("beamer", "an object that memorize the room where it is charged and allow you to be teleported to this room in the future.", 50, this.aPlayer,this);
+        vBitcoin.addItem(vBeamer);
     }
 
     public void setGUI(final UserInterface pUserInterface) {
@@ -172,6 +178,10 @@ public class GameEngine {
                 this.items(vCommand);
             } else if (vCommand.getCommandWord().equals("eat")) {
                 this.eat(vCommand);
+            } else if(vCommand.getCommandWord().equals("use")) {
+                this.use(vCommand);
+            } else if(vCommand.getCommandWord().equals("charge")) {
+                this.charge(vCommand);
             }
             if (vCommand.getCommandWord().equals("quit")) {
                 this.quit(vCommand);
@@ -346,6 +356,30 @@ public class GameEngine {
         }
     }
 
+    private void use(final Command pCommand) {
+        if(pCommand.hasSecondWord()) {
+            Beamer vBeamer = (Beamer)this.aPlayer.getItems().get(pCommand.getSecondWord());
+            if(vBeamer.equals(null)) {
+                this.aGui.println("You don't have "+pCommand.getSecondWord());
+            } else {
+                this.aGui.println(vBeamer.fire());
+            }
+        } else {
+            this.aGui.println("Use what ?");
+        }
+    }
+    public void charge(final Command pCommand) {
+        if(pCommand.hasSecondWord()) {
+            Beamer vBeamer = (Beamer)this.aPlayer.getItems().get(pCommand.getSecondWord());
+            if(vBeamer==null) {
+                this.aGui.println("You don't have a "+pCommand.getSecondWord());
+            } else {
+                this.aGui.println(vBeamer.charge(this.aPlayer.getCurrentRoom()));
+            }
+        } else {
+            this.aGui.println("Charge what ?");
+        }
+    }
     private void endGame() {
         this.aGui.println("Thank you for playing.  Good bye.");
         this.aGui.enable(false);
@@ -366,5 +400,7 @@ public class GameEngine {
     public String getCurrentRoom() {
         return this.aPlayer.getCurrentRoom().getDescription();
     }
-
+    public UserInterface getGui() {
+        return this.aGui;
+    }
 } // Game
