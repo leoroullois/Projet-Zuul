@@ -64,7 +64,9 @@ public class Player {
     public Stack<Room> getPrevRooms() {
         return this.aPrevRooms;
     }
-
+    public void setPrevRooms(final Stack<Room> pRooms) {
+        this.aPrevRooms=pRooms;
+    }
     public String getName() {
         return this.aName;
     }

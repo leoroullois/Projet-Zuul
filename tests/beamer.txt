@@ -1,0 +1,8 @@
+take beamer
+charge beamer
+go north
+go north
+go west
+back
+use beamer
+back

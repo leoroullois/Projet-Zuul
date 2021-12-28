@@ -1,8 +1,6 @@
 import java.util.HashMap;
 import java.util.Set;
 
-import javax.sql.PooledConnection;
-
 // Lecture de fichier
 import java.io.FileReader;
 import java.io.BufferedReader;
@@ -39,7 +37,7 @@ public class GameEngine {
         Item vCake = new Item("cake", "a magical cake.", 500);
 
         Item vBollinger = new Item("bollinger", "the bollinger bands indicator", 50);
-        
+
         // Rooms
         Room vBitcoin = new Room("outside the main entrance of the crypto world", "img/gifs/bitcoin.gif");
         vBitcoin.addItem(vKeyDefi);
@@ -114,10 +112,12 @@ public class GameEngine {
         vNFT.setExit("east", vDefiBSC);
 
         // this.aPrevRooms = new Stack<Room>();
-        this.aPlayer = new Player(vBitcoin,this);
+        this.aPlayer = new Player(vBitcoin, this);
         this.aPlayer.setCurrentRoom(vBitcoin);
 
-        Beamer vBeamer = new Beamer("beamer", "an object that memorize the room where it is charged and allow you to be teleported to this room in the future.", 50, this.aPlayer,this);
+        Beamer vBeamer = new Beamer("beamer",
+                "an object that memorize the room where it is charged and allow you to be teleported to this room in the future.",
+                50, this.aPlayer, this);
         vBitcoin.addItem(vBeamer);
     }
 
@@ -174,13 +174,13 @@ public class GameEngine {
                 this.take(vCommand);
             } else if (vCommand.getCommandWord().equals("drop")) {
                 this.drop(vCommand);
-            } else if(vCommand.getCommandWord().equals("items")) {
+            } else if (vCommand.getCommandWord().equals("items")) {
                 this.items(vCommand);
             } else if (vCommand.getCommandWord().equals("eat")) {
                 this.eat(vCommand);
-            } else if(vCommand.getCommandWord().equals("use")) {
+            } else if (vCommand.getCommandWord().equals("use")) {
                 this.use(vCommand);
-            } else if(vCommand.getCommandWord().equals("charge")) {
+            } else if (vCommand.getCommandWord().equals("charge")) {
                 this.charge(vCommand);
             }
             if (vCommand.getCommandWord().equals("quit")) {
@@ -206,8 +206,10 @@ public class GameEngine {
 
     /**
      * Défini l'action de la commande look :
-     * look : donne des informations sur la salle actuelle, les items présents à l'intérieur et les sorties.
+     * look : donne des informations sur la salle actuelle, les items présents à
+     * l'intérieur et les sorties.
      * look wallet : affiche l'argent du joueur.
+     * 
      * @param pCommand commande look
      */
     private void look(final Command pCommand) {
@@ -233,12 +235,15 @@ public class GameEngine {
             this.aGui.println(this.aPlayer.getCurrentRoom().getLongDescription());
         }
     }
+
     private void eat(final Command pCommand) {
         this.aGui.println(this.aPlayer.eatCake(pCommand));
     }
+
     private void items(final Command pCommand) {
         this.aGui.println(this.aPlayer.lookItems());
     }
+
     /**
      * Défini l'action de la commande buy
      * 
@@ -293,23 +298,24 @@ public class GameEngine {
     private void back(final Command pCommand) {
         if (pCommand.hasSecondWord()) {
             this.aGui.println("I don't understand what you are saying.");
-        } else if(!this.aPlayer.getCurrentRoom().isExit(this.aPlayer.getPrevRooms().peek())) {
-            this.aGui.println("There are no door to go back.");
-        } else {
-            if (!this.aPlayer.getPrevRooms().empty()) {
+        } else if (this.aPlayer.getPrevRooms().empty()) {
+            this.aGui.println("There are no previous room.");
+        } else if (this.aPlayer.getCurrentRoom().isExit(this.aPlayer.getPrevRooms().peek())) {
                 this.aPlayer.goBack();
                 this.printLocationInfo();
-            } else {
-                this.aGui.println("There are no previous room.");
-            }
             if (this.aPlayer.getCurrentRoom().getImageName() != null) {
                 this.aGui.showImage(this.aPlayer.getCurrentRoom().getImageName());
             }
+        } else {
+            this.aGui.println("There are no door to go back.");
         }
     }
+
     /**
      * Test le jeu à partir d'un fichier texte contenant les commandes voulues.
-     * @param pCommand commande test fichier pour tester le jeu avec les commandes dans fichier.txt
+     * 
+     * @param pCommand commande test fichier pour tester le jeu avec les commandes
+     *                 dans fichier.txt
      */
     private void test(final Command pCommand) {
         if (!pCommand.hasSecondWord()) {
@@ -331,8 +337,10 @@ public class GameEngine {
             }
         }
     }
+
     /**
      * Permet au joueur de prendre un item dans son iventaire.
+     * 
      * @param pCommand take item
      */
     public void take(final Command pCommand) {
@@ -343,8 +351,10 @@ public class GameEngine {
             this.aGui.println("Take what ?");
         }
     }
+
     /**
      * Permet au joueur de déposé un item dans la salle actuelle
+     * 
      * @param pCommand drop item
      */
     public void drop(final Command pCommand) {
@@ -357,10 +367,10 @@ public class GameEngine {
     }
 
     private void use(final Command pCommand) {
-        if(pCommand.hasSecondWord()) {
-            Beamer vBeamer = (Beamer)this.aPlayer.getItems().get(pCommand.getSecondWord());
-            if(vBeamer.equals(null)) {
-                this.aGui.println("You don't have "+pCommand.getSecondWord());
+        if (pCommand.hasSecondWord()) {
+            Beamer vBeamer = (Beamer) this.aPlayer.getItems().get(pCommand.getSecondWord());
+            if (vBeamer.equals(null)) {
+                this.aGui.println("You don't have " + pCommand.getSecondWord());
             } else {
                 this.aGui.println(vBeamer.fire());
             }
@@ -368,11 +378,12 @@ public class GameEngine {
             this.aGui.println("Use what ?");
         }
     }
+
     public void charge(final Command pCommand) {
-        if(pCommand.hasSecondWord()) {
-            Beamer vBeamer = (Beamer)this.aPlayer.getItems().get(pCommand.getSecondWord());
-            if(vBeamer==null) {
-                this.aGui.println("You don't have a "+pCommand.getSecondWord());
+        if (pCommand.hasSecondWord()) {
+            Beamer vBeamer = (Beamer) this.aPlayer.getItems().get(pCommand.getSecondWord());
+            if (vBeamer == null) {
+                this.aGui.println("You don't have a " + pCommand.getSecondWord());
             } else {
                 this.aGui.println(vBeamer.charge(this.aPlayer.getCurrentRoom()));
             }
@@ -380,6 +391,7 @@ public class GameEngine {
             this.aGui.println("Charge what ?");
         }
     }
+
     private void endGame() {
         this.aGui.println("Thank you for playing.  Good bye.");
         this.aGui.enable(false);
@@ -400,6 +412,7 @@ public class GameEngine {
     public String getCurrentRoom() {
         return this.aPlayer.getCurrentRoom().getDescription();
     }
+
     public UserInterface getGui() {
         return this.aGui;
     }
