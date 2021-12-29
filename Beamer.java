@@ -17,13 +17,20 @@ public class Beamer extends Item {
     public boolean getCharged() {
         return this.aCharged;
     }
-
+    /**
+     * Charge le beamer
+     * @param pRoom salle ou le beamer nous téléportera
+     * @return String
+     */
     public String charge(final Room pRoom) {
         this.aRoom = pRoom;
         this.aCharged = true;
         return "You've just charged your beamer.";
     }
-
+    /**
+     * Utilises le beamer pour nous téléporter.
+     * @return String
+     */
     public String fire() {
         if (!this.aCharged) {
             return "Your beamer is not charged. You can't use it.";

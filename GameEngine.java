@@ -104,7 +104,7 @@ public class GameEngine {
 
         vEthereum.setExit("north", vShitCoin, vEthShitcoinDoor);
         vEthereum.setExit("east", vTrading, vEthTradingDoor);
-        vEthereum.setExit("south", vBitcoin,vBtcEthDoor);
+        vEthereum.setExit("south", vBitcoin, vBtcEthDoor);
         vEthereum.setExit("west", vDefiETH, vEthDefiDoor);
 
         vShitCoin.setExit("east", vHackLab, vShitcoinHackDoor);
@@ -205,7 +205,7 @@ public class GameEngine {
                 this.charge(vCommand);
             } else if (vCommand.getCommandWord().equals("open")) {
                 this.open(vCommand);
-            } else if(vCommand.getCommandWord().equals("close")) {
+            } else if (vCommand.getCommandWord().equals("close")) {
                 this.close(vCommand);
             }
             if (vCommand.getCommandWord().equals("quit")) {
@@ -261,10 +261,20 @@ public class GameEngine {
         }
     }
 
+    /**
+     * Permet au joueur de manger
+     * 
+     * @param pCommand commande
+     */
     private void eat(final Command pCommand) {
         this.aGui.println(this.aPlayer.eatCake(pCommand));
     }
 
+    /**
+     * Liste des items
+     * 
+     * @param pCommand commande
+     */
     private void items(final Command pCommand) {
         this.aGui.println(this.aPlayer.lookItems());
     }
@@ -308,7 +318,7 @@ public class GameEngine {
             return;
         } else {
             Door vDoor = this.aPlayer.getCurrentRoom().getDoors().get(vDirection);
-            if(vDoor.getLocked()) {
+            if (vDoor.getLocked()) {
                 this.aGui.println("The door is locked.");
             } else {
                 this.aPlayer.changeRoom(vNextRoom);
@@ -396,6 +406,11 @@ public class GameEngine {
         }
     }
 
+    /**
+     * permet d'utiliser des items
+     * 
+     * @param pCommand commande
+     */
     private void use(final Command pCommand) {
         if (pCommand.hasSecondWord()) {
             Beamer vBeamer = (Beamer) this.aPlayer.getItems().get(pCommand.getSecondWord());
@@ -409,6 +424,11 @@ public class GameEngine {
         }
     }
 
+    /**
+     * Permet de charger un beamer.
+     * 
+     * @param pCommand commande
+     */
     public void charge(final Command pCommand) {
         if (pCommand.hasSecondWord()) {
             Beamer vBeamer = (Beamer) this.aPlayer.getItems().get(pCommand.getSecondWord());
@@ -422,6 +442,11 @@ public class GameEngine {
         }
     }
 
+    /**
+     * Ouvre une porte
+     * 
+     * @param pCommand commande
+     */
     public void open(final Command pCommand) {
         if (!pCommand.hasSecondWord()) {
             this.aGui.println("Open wich door ?");
@@ -432,10 +457,11 @@ public class GameEngine {
             } else {
                 Door vDoor = this.aPlayer.getCurrentRoom().getDoors().get(vDirection);
                 Item vKey = vDoor.getGoodKey(this.aPlayer.getItems());
-                if(!vDoor.getLocked()) {
+                if (!vDoor.getLocked()) {
                     this.aGui.println("The door is already open.");
                 } else if (vKey == null) {
-                    this.aGui.println("You don't have key in your inventory or you don't have the good key to open this door.");
+                    this.aGui.println(
+                            "You don't have key in your inventory or you don't have the good key to open this door.");
                 } else {
                     this.aPlayer.getCurrentRoom().getDoors().get(vDirection).openDoor();
                     this.aGui.println("The door is now open.");
@@ -443,6 +469,12 @@ public class GameEngine {
             }
         }
     }
+
+    /**
+     * ferme une porte
+     * 
+     * @param pCommand commande
+     */
     public void close(final Command pCommand) {
         if (!pCommand.hasSecondWord()) {
             this.aGui.println("Close wich door ?");
@@ -453,10 +485,11 @@ public class GameEngine {
             } else {
                 Door vDoor = this.aPlayer.getCurrentRoom().getDoors().get(vDirection);
                 Item vKey = vDoor.getGoodKey(this.aPlayer.getItems());
-                if(vDoor.getLocked()) {
+                if (vDoor.getLocked()) {
                     this.aGui.println("The door is already close.");
                 } else if (vKey == null) {
-                    this.aGui.println("You don't have key in your inventory or you don't have the good key to close this door.");
+                    this.aGui.println(
+                            "You don't have key in your inventory or you don't have the good key to close this door.");
                 } else {
                     this.aPlayer.getCurrentRoom().getDoors().get(vDirection).closeDoor();
                     this.aGui.println("The door is now close.");
@@ -464,6 +497,7 @@ public class GameEngine {
             }
         }
     }
+
     private void endGame() {
         this.aGui.println("Thank you for playing.  Good bye.");
         this.aGui.enable(false);

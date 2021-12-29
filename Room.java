@@ -64,11 +64,22 @@ public class Room {
             this.aExits.put(pDirection, pNeighbor);
         }
     }
+    /**
+     * Crée une porte
+     * @param pDirection direction dans laquelle se trouve la porte
+     * @param pDoor la porte
+     */
     public void setExitDoor(final String pDirection, final Door pDoor) {
         if(pDirection!=null) {
             this.aDoors.put(pDirection,pDoor);
         }
     }
+    /**
+     * Paramètre la porte et la salle de sortie.
+     * @param pDirection la direction vers la sortie
+     * @param pRoom la salle de destination
+     * @param pDoor la porte entre la salle actuelle et la salle de destination.
+     */
     public void setExit(final String pDirection, final Room pRoom, final Door pDoor) {
         this.setExitRoom(pDirection, pRoom);
         this.setExitDoor(pDirection, pDoor);
@@ -109,6 +120,11 @@ public class Room {
         return this.aItems.getItems();
     }
 
+    /**
+     * Renvoie true ou false en fonction de si la salle est une sortie ou non de la salle actuelle.
+     * @param pRoom salle de sortie ?
+     * @return boolean
+     */
     public boolean isExit(final Room pRoom) {
         Set<String> allKeys = this.aExits.keySet();
         for (String vKey : allKeys) {
