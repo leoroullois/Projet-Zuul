@@ -1,6 +1,8 @@
+import java.util.HashMap;
+
 public class CommandWords {
     // Tableau constant qui contient toutes les commandes valides.
-    private static final String[] VALID_COMMANDS = { "go", "quit", "help", "look", "buy","back","test","take", "drop","items","eat","use","charge" };
+    private static final String[] VALID_COMMANDS = { "go", "quit", "help", "look", "buy","back","test","take", "drop","items","eat","use","charge","open","close" };
 
     public CommandWords() {
 

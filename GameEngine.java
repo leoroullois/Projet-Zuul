@@ -25,12 +25,13 @@ public class GameEngine {
     private void createRooms() {
 
         this.aAllRooms = new HashMap<String, Room>();
-        // Items
+        // ? Items
         Item vCpu1 = new Item("cpu1", "a CPU that provide you calcul power for mining.", 500);
         Item vCpu2 = new Item("cpu2", "a CPU that provide you calcul power for mining", 1000);
 
         Item vKeyDefi = new Item("key", "a key that aims you open the defi room.", 0);
 
+        Item vKeyBtc = new Item("keyBTC", "a key that aims you open the ETH room from the BTC room.", 50);
         Item vShiba = new Item("shiba", "a shiba that helps you pump the Shiba INU", 300);
         Item vDoge = new Item("doge", "a dog that helps youu pump the Doge Coin.", 300);
 
@@ -38,9 +39,10 @@ public class GameEngine {
 
         Item vBollinger = new Item("bollinger", "the bollinger bands indicator", 50);
 
-        // Rooms
+        // ? Rooms
         Room vBitcoin = new Room("outside the main entrance of the crypto world", "img/gifs/bitcoin.gif");
         vBitcoin.addItem(vKeyDefi);
+        vBitcoin.addItem(vKeyBtc);
         this.aAllRooms.put("Bitcoin", vBitcoin);
 
         Room vEthereum = new Room("in the second greatest empire of the world of crypto", "img/gifs/ethereum.gif");
@@ -76,42 +78,61 @@ public class GameEngine {
         Room vNFT = new Room("in the NFT hall", "img/gifs/nft.gif");
         this.aAllRooms.put("NFT", vNFT);
 
-        // ! Pour l'instant tous les passages sont à double sens
-        vBitcoin.setExit("north", vEthereum);
-        vBitcoin.setExit("west", vMining);
+        // ? Doors
+        Door vBtcEthDoor = new Door(true, vKeyBtc);
+        Door vBtcMiningDoor = new Door(false, null);
 
-        vEthereum.setExit("north", vShitCoin);
-        vEthereum.setExit("east", vTrading);
-        // vEthereum.setExit("south", vBitcoin);
-        vEthereum.setExit("west", vDefiETH);
+        Door vEthTradingDoor = new Door(false, null);
+        Door vEthDefiDoor = new Door(false, null);
+        Door vEthShitcoinDoor = new Door(false, null);
 
-        vShitCoin.setExit("east", vHackLab);
-        vShitCoin.setExit("south", vEthereum);
-        vShitCoin.setExit("west", vICO);
+        Door vShitcoinHackDoor = new Door(false, null);
+        Door vShitcoinIcoDoor = new Door(false, null);
 
-        vHackLab.setExit("south", vTrading);
-        vHackLab.setExit("west", vShitCoin);
+        Door vHackTradingDoor = new Door(false, null);
 
-        vTrading.setExit("north", vHackLab);
-        vTrading.setExit("west", vEthereum);
+        Door vIcoDefiDoor = new Door(false, null);
 
-        vICO.setExit("east", vShitCoin);
-        vICO.setExit("south", vDefiETH);
+        Door vDefiMiningDoor = new Door(false, null);
 
-        vDefiETH.setExit("north", vICO);
-        vDefiETH.setExit("up", vDefiBSC);
-        vDefiETH.setExit("east", vEthereum);
-        vDefiETH.setExit("south", vMining);
-        vDefiETH.setExit("west", vNFT);
+        Door vDefiNftDoor = new Door(false, null);
 
-        vDefiBSC.setExit("down", vDefiETH);
+        Door vDefiDoor = new Door(false, null);
 
-        vMining.setExit("north", vDefiETH);
-        vMining.setExit("east", vBitcoin);
+        vBitcoin.setExit("north", vEthereum, vBtcEthDoor);
+        vBitcoin.setExit("west", vMining, vBtcMiningDoor);
 
-        vNFT.setExit("east", vDefiBSC);
+        vEthereum.setExit("north", vShitCoin, vEthShitcoinDoor);
+        vEthereum.setExit("east", vTrading, vEthTradingDoor);
+        vEthereum.setExit("south", vBitcoin,vBtcEthDoor);
+        vEthereum.setExit("west", vDefiETH, vEthDefiDoor);
 
-        // this.aPrevRooms = new Stack<Room>();
+        vShitCoin.setExit("east", vHackLab, vShitcoinHackDoor);
+        vShitCoin.setExit("south", vEthereum, vEthShitcoinDoor);
+        vShitCoin.setExit("west", vICO, vShitcoinIcoDoor);
+
+        vHackLab.setExit("south", vTrading, vHackTradingDoor);
+        vHackLab.setExit("west", vShitCoin, vShitcoinHackDoor);
+
+        vTrading.setExit("north", vHackLab, vHackTradingDoor);
+        vTrading.setExit("west", vEthereum, vEthTradingDoor);
+
+        vICO.setExit("east", vShitCoin, vShitcoinIcoDoor);
+        vICO.setExit("south", vDefiETH, vIcoDefiDoor);
+
+        vDefiETH.setExit("north", vICO, vIcoDefiDoor);
+        vDefiETH.setExit("up", vDefiBSC, vDefiDoor);
+        vDefiETH.setExit("east", vEthereum, vEthDefiDoor);
+        vDefiETH.setExit("south", vMining, vDefiMiningDoor);
+        vDefiETH.setExit("west", vNFT, vDefiNftDoor);
+
+        vDefiBSC.setExit("down", vDefiETH, vDefiDoor);
+
+        vMining.setExit("north", vDefiETH, vDefiMiningDoor);
+        vMining.setExit("east", vBitcoin, vBtcMiningDoor);
+
+        vNFT.setExit("east", vDefiETH, vDefiNftDoor);
+
         this.aPlayer = new Player(vBitcoin, this);
         this.aPlayer.setCurrentRoom(vBitcoin);
 
@@ -182,6 +203,10 @@ public class GameEngine {
                 this.use(vCommand);
             } else if (vCommand.getCommandWord().equals("charge")) {
                 this.charge(vCommand);
+            } else if (vCommand.getCommandWord().equals("open")) {
+                this.open(vCommand);
+            } else if(vCommand.getCommandWord().equals("close")) {
+                this.close(vCommand);
             }
             if (vCommand.getCommandWord().equals("quit")) {
                 this.quit(vCommand);
@@ -282,10 +307,15 @@ public class GameEngine {
             this.aGui.println("There is no door !");
             return;
         } else {
-            this.aPlayer.changeRoom(vNextRoom);
-            this.printLocationInfo();
-            if (this.aPlayer.getCurrentRoom().getImageName() != null) {
-                this.aGui.showImage(this.aPlayer.getCurrentRoom().getImageName());
+            Door vDoor = this.aPlayer.getCurrentRoom().getDoors().get(vDirection);
+            if(vDoor.getLocked()) {
+                this.aGui.println("The door is locked.");
+            } else {
+                this.aPlayer.changeRoom(vNextRoom);
+                this.printLocationInfo();
+                if (this.aPlayer.getCurrentRoom().getImageName() != null) {
+                    this.aGui.showImage(this.aPlayer.getCurrentRoom().getImageName());
+                }
             }
         }
     }
@@ -301,8 +331,8 @@ public class GameEngine {
         } else if (this.aPlayer.getPrevRooms().empty()) {
             this.aGui.println("There are no previous room.");
         } else if (this.aPlayer.getCurrentRoom().isExit(this.aPlayer.getPrevRooms().peek())) {
-                this.aPlayer.goBack();
-                this.printLocationInfo();
+            this.aPlayer.goBack();
+            this.printLocationInfo();
             if (this.aPlayer.getCurrentRoom().getImageName() != null) {
                 this.aGui.showImage(this.aPlayer.getCurrentRoom().getImageName());
             }
@@ -392,6 +422,48 @@ public class GameEngine {
         }
     }
 
+    public void open(final Command pCommand) {
+        if (!pCommand.hasSecondWord()) {
+            this.aGui.println("Open wich door ?");
+        } else {
+            String vDirection = pCommand.getSecondWord();
+            if (this.aPlayer.getCurrentRoom().getDoors().get(vDirection) == null) {
+                this.aGui.println("There is no door to open in that direction.");
+            } else {
+                Door vDoor = this.aPlayer.getCurrentRoom().getDoors().get(vDirection);
+                Item vKey = vDoor.getGoodKey(this.aPlayer.getItems());
+                if(!vDoor.getLocked()) {
+                    this.aGui.println("The door is already open.");
+                } else if (vKey == null) {
+                    this.aGui.println("You don't have key in your inventory or you don't have the good key to open this door.");
+                } else {
+                    this.aPlayer.getCurrentRoom().getDoors().get(vDirection).openDoor();
+                    this.aGui.println("The door is now open.");
+                }
+            }
+        }
+    }
+    public void close(final Command pCommand) {
+        if (!pCommand.hasSecondWord()) {
+            this.aGui.println("Close wich door ?");
+        } else {
+            String vDirection = pCommand.getSecondWord();
+            if (this.aPlayer.getCurrentRoom().getDoors().get(vDirection) == null) {
+                this.aGui.println("There is no door to close in that direction.");
+            } else {
+                Door vDoor = this.aPlayer.getCurrentRoom().getDoors().get(vDirection);
+                Item vKey = vDoor.getGoodKey(this.aPlayer.getItems());
+                if(vDoor.getLocked()) {
+                    this.aGui.println("The door is already close.");
+                } else if (vKey == null) {
+                    this.aGui.println("You don't have key in your inventory or you don't have the good key to close this door.");
+                } else {
+                    this.aPlayer.getCurrentRoom().getDoors().get(vDirection).closeDoor();
+                    this.aGui.println("The door is now close.");
+                }
+            }
+        }
+    }
     private void endGame() {
         this.aGui.println("Thank you for playing.  Good bye.");
         this.aGui.enable(false);

@@ -4,22 +4,27 @@ import java.util.Set;
 public class Room {
     private String aDescription;
     private HashMap<String, Room> aExits;
+    private HashMap<String, Door> aDoors;
     private String aImageName;
     private ItemList aItems;
 
-    public Room(final String pDescription,final String pImageName) {
+    public Room(final String pDescription, final String pImageName) {
         this.aDescription = pDescription;
         this.aExits = new HashMap<String, Room>();
-        this.aImageName=pImageName;
+        this.aDoors = new HashMap<String, Door>();
+        this.aImageName = pImageName;
         this.aItems = new ItemList();
     }
+
     /**
      * Retourne le nom de l'image de la salle
+     * 
      * @return nom de l'image
      */
     public String getImageName() {
         return this.aImageName;
     }
+
     /**
      * Récupère la description de la salle actuelle
      * 
@@ -28,19 +33,21 @@ public class Room {
     public String getDescription() {
         return this.aDescription;
     }
-
+    public HashMap<String,Door> getDoors() {
+        return this.aDoors;
+    }
     /**
      * Donne une longue description de la salle
      * 
      * @return longue description
      */
     public String getLongDescription() {
-        String vOutput = "You are " + this.aDescription + ".\n" + this.getExitString()+"\n";
-        String vAllItems ="Items :" + this.aItems.getItemsString();
+        String vOutput = "You are " + this.aDescription + ".\n" + this.getExitString() + "\n";
+        String vAllItems = "Items :" + this.aItems.getItemsString();
         if (vAllItems.equals("Items :")) {
-            vOutput+="No item here.";
+            vOutput += "No item here.";
         } else {
-            vOutput+=vAllItems;
+            vOutput += vAllItems;
         }
         return vOutput;
     }
@@ -52,12 +59,20 @@ public class Room {
      * @param pNeighbor  la salle dans laquelle on veut arriver en suivant cette
      *                   direction.
      */
-    public void setExit(final String pDirection, final Room pNeighbor) {
+    public void setExitRoom(final String pDirection, final Room pNeighbor) {
         if (pDirection != null) {
             this.aExits.put(pDirection, pNeighbor);
         }
     }
-
+    public void setExitDoor(final String pDirection, final Door pDoor) {
+        if(pDirection!=null) {
+            this.aDoors.put(pDirection,pDoor);
+        }
+    }
+    public void setExit(final String pDirection, final Room pRoom, final Door pDoor) {
+        this.setExitRoom(pDirection, pRoom);
+        this.setExitDoor(pDirection, pDoor);
+    }
     /**
      * Retourne la salle qui se trouve dans la direction donnée.
      * 
@@ -85,16 +100,19 @@ public class Room {
         }
         return vSb.toString();
     }
+
     public void addItem(final Item pItem) {
         this.aItems.addItem(pItem);
     }
-    public HashMap<String,Item> getItems() {
+
+    public HashMap<String, Item> getItems() {
         return this.aItems.getItems();
     }
+
     public boolean isExit(final Room pRoom) {
         Set<String> allKeys = this.aExits.keySet();
-        for(String vKey : allKeys) {
-            if(this.aExits.get(vKey).equals(pRoom)) {
+        for (String vKey : allKeys) {
+            if (this.aExits.get(vKey).equals(pRoom)) {
                 return true;
             }
         }
