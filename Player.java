@@ -36,7 +36,6 @@ public class Player {
         ActionListener taskPerformer = new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 TIME++;
-                System.out.println(TIME);
                 if (TIME == MAX_TIME) {
                     GAME_ENGINE.interpretCommand("quit");
                     MY_TIMER.stop();

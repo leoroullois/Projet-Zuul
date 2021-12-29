@@ -75,7 +75,7 @@ public class GameEngine {
         vMining.addItem(vCpu2);
         this.aAllRooms.put("Mining", vMining);
 
-        Room vNFT = new Room("in the NFT hall", "img/gifs/nft.gif");
+        Room vNFT = new TransporterRoom("in the NFT hall", "img/gifs/nft.gif",this.aAllRooms);
         this.aAllRooms.put("NFT", vNFT);
 
         // ? Doors
@@ -141,7 +141,9 @@ public class GameEngine {
                 50, this.aPlayer, this);
         vBitcoin.addItem(vBeamer);
     }
-
+    public HashMap<String,Room> getRooms() {
+        return this.aAllRooms;
+    }
     public void setGUI(final UserInterface pUserInterface) {
         this.aGui = pUserInterface;
         this.printWelcome();
@@ -318,7 +320,9 @@ public class GameEngine {
             return;
         } else {
             Door vDoor = this.aPlayer.getCurrentRoom().getDoors().get(vDirection);
-            if (vDoor.getLocked()) {
+            if(vDoor==null) {
+                this.aGui.println("There is no door !");
+            } else if (vDoor.getLocked()) {
                 this.aGui.println("The door is locked.");
             } else {
                 this.aPlayer.changeRoom(vNextRoom);
