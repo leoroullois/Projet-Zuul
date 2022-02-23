@@ -1,4 +1,2 @@
-http://www.esiee.fr/~bureaud/
-unites.htm
-
-POUR CEUX QUI NE RENDENT PAS DE PAGE WEB
+https://perso.esiee.fr/~roulloil/
+Site web sur lequel se trouve la page du projet.

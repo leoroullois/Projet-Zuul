@@ -38,8 +38,9 @@ public class UserInterface implements ActionListener {
     private JTextField aEntryField;
     private JTextArea aLog;
     private JLabel aImage;
-    private HashMap<String,JButton> aButtons;
+    private HashMap<String, JButton> aButtons;
     private JPanel aPanelButtons;
+    private JButton myBtn;
 
     /**
      * Construct a UserInterface. As a parameter, a Game Engine (an object
@@ -48,9 +49,10 @@ public class UserInterface implements ActionListener {
      * @param gameEngine The GameEngine object implementing the game logic.
      */
     public UserInterface(final GameEngine pGameEngine) {
-        this.aButtons = new HashMap<String,JButton>();
+        this.myBtn = new JButton("go north");
+        this.aButtons = new HashMap<String, JButton>();
         this.aPanelButtons = new JPanel();
-        aPanelButtons.setLayout(new GridLayout(2,1));
+        aPanelButtons.setLayout(new GridLayout(2, 1));
         this.aEngine = pGameEngine;
         this.createGUI();
     } // UserInterface(.)
@@ -104,8 +106,8 @@ public class UserInterface implements ActionListener {
         this.aEntryField = new JTextField(34);
         JButton bitcoinBtn = new JButton("Buy Bitcoin");
         JButton quitButton = new JButton("Quit");
-        this.aButtons.put("bitcoin",bitcoinBtn);
-        this.aButtons.put("quit",quitButton);
+        this.aButtons.put("bitcoin", bitcoinBtn);
+        this.aButtons.put("quit", quitButton);
 
         this.aLog = new JTextArea();
         this.aLog.setEditable(false);
@@ -115,19 +117,20 @@ public class UserInterface implements ActionListener {
 
         JPanel vPanel = new JPanel();
         this.aImage = new JLabel();
-
         vPanel.setLayout(new BorderLayout()); // ==> only five places
+        vPanel.add(this.myBtn, BorderLayout.WEST);
+        this.myBtn.addActionListener(this);
         vPanel.add(this.aImage, BorderLayout.NORTH);
         vPanel.add(vListScroller, BorderLayout.CENTER);
         vPanel.add(this.aEntryField, BorderLayout.SOUTH);
 
         Set<String> allKeys = this.aButtons.keySet();
-        for(String vKey : allKeys) {
+        for (String vKey : allKeys) {
             this.aPanelButtons.add(this.aButtons.get(vKey));
             this.aButtons.get(vKey).addActionListener(this);
         }
-        
-        vPanel.add(this.aPanelButtons,BorderLayout.EAST);
+
+        vPanel.add(this.aPanelButtons, BorderLayout.EAST);
         this.aMyFrame.getContentPane().add(vPanel, BorderLayout.CENTER);
 
         // add some event listeners to some components
@@ -148,10 +151,12 @@ public class UserInterface implements ActionListener {
      * Actionlistener interface for entry textfield.
      */
     public void actionPerformed(final ActionEvent pE) {
-        if (pE.getActionCommand()=="Buy Bitcoin") {
+        if (pE.getActionCommand() == "Buy Bitcoin") {
             this.aEngine.interpretCommand("buy bitcoin");
-        } else if (pE.getActionCommand()=="Quit") {
+        } else if (pE.getActionCommand() == "Quit") {
             this.aEngine.interpretCommand("quit");
+        } else if (pE.getActionCommand() == "go north") {
+            this.aEngine.interpretCommand("go north");
         } else {
             this.processCommand();
         }
@@ -163,6 +168,7 @@ public class UserInterface implements ActionListener {
             this.aButtons.get(vButton).setEnabled(false);
         }
     }
+
     /**
      * A command has been entered. Read the command and do whatever is necessary to
      * process it.

@@ -29,7 +29,7 @@ public class GameEngine {
         Item vCpu1 = new Item("cpu1", "a CPU that provide you calcul power for mining.", 500);
         Item vCpu2 = new Item("cpu2", "a CPU that provide you calcul power for mining", 1000);
 
-        Item vKeyDefi = new Item("key", "a key that aims you open the defi room.", 0);
+        Item vKeyDefi = new Item("keyDEFI", "a key that aims you open the defi room.", 0);
 
         Item vKeyBtc = new Item("keyBTC", "a key that aims you open the ETH room from the BTC room.", 50);
         Item vShiba = new Item("shiba", "a shiba that helps you pump the Shiba INU", 300);
@@ -41,12 +41,12 @@ public class GameEngine {
 
         // ? Rooms
         Room vBitcoin = new Room("outside the main entrance of the crypto world", "img/gifs/bitcoin.gif");
-        vBitcoin.addItem(vKeyDefi);
         vBitcoin.addItem(vKeyBtc);
         this.aAllRooms.put("Bitcoin", vBitcoin);
 
         Room vEthereum = new Room("in the second greatest empire of the world of crypto", "img/gifs/ethereum.gif");
         vEthereum.addItem(vCake);
+        vEthereum.addItem(vKeyDefi);
         this.aAllRooms.put("Ethereum", vEthereum);
 
         Room vShitCoin = new Room("in the shit coin hall", "img/gifs/shitcoin.gif");
@@ -54,10 +54,10 @@ public class GameEngine {
         vShitCoin.addItem(vDoge);
         this.aAllRooms.put("ShitCoin", vShitCoin);
 
-        Room vHackLab = new Room("in a computing lab", "img/gifs/hacking.gif");
+        Room vHackLab = new Room("in a computing lab", "img/hacking.jpg");
         this.aAllRooms.put("HackLab", vHackLab);
 
-        Room vTrading = new Room("in a computing office", "img/gifs/trading.gif");
+        Room vTrading = new Room("in a computing office", "img/trading.png");
         vTrading.addItem(vBollinger);
         this.aAllRooms.put("Trading", vTrading);
 
@@ -83,7 +83,7 @@ public class GameEngine {
         Door vBtcMiningDoor = new Door(false, null);
 
         Door vEthTradingDoor = new Door(false, null);
-        Door vEthDefiDoor = new Door(false, null);
+        Door vEthDefiDoor = new Door(true, vKeyDefi);
         Door vEthShitcoinDoor = new Door(false, null);
 
         Door vShitcoinHackDoor = new Door(false, null);
